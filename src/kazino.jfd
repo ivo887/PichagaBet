@@ -1,0 +1,41 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.4" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space ::26:x, par l {seq {space :6:6:p, comp textField2:::p:69:p}, par l {seq t {comp comboBox1:::p::p, space s:::p, comp textField1:::p:147:p, space :::p, comp button1:::p::p, space :p:148:p}, seq t {comp progressBar1:::p:388:p, space :p:65:p}, seq t {comp moneyLabel:::p:50:p, space :p:27:p}}}}}"
+			"$verticalGroup": "par l {seq l {space :p:25:p, comp moneyLabel:::p:25:p, space :p:28:p, comp progressBar1:::p:168:p, space ::35:x, par b {comp textField1::b:p::p, comp button1::b:p::p, comp comboBox1::b:p::p}, space :::p, comp textField2:::p::p, space :p:44:p}}"
+		} ) {
+			name: "panel1"
+			"background": new java.awt.Color( 0, 0, 0, 255 )
+			add( new FormComponent( "javax.swing.JProgressBar" ) {
+				name: "progressBar1"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField1"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "text"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "moneyLabel"
+				"background": new java.awt.Color( 255, 255, 255, 255 )
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox1"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "textField2"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 515, 400 )
+		} )
+	}
+}
