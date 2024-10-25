@@ -16,6 +16,7 @@ public class kazino extends JFrame {
     private JButton button1;
     private JPanel panel1;
     private JProgressBar progressBar1;
+    //test PR
 
     public kazino() {
         JFrame frame = new JFrame("PichagaBET");
