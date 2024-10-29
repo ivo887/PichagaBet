@@ -6,10 +6,12 @@ import java.util.Random;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import com.intellij.uiDesigner.core.*;
+
 
 public class kazino extends JFrame {
     private int totalMoney = 100; // Starting money// Combo box for betting options
-
+    private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "6-Line (6 numbers)"};
     public kazino() {
         initComponents();
         JFrame frame = new JFrame("PichagaBET");
@@ -52,6 +54,7 @@ public class kazino extends JFrame {
         private int bet;
         private String betType;
         private String betNumbers;
+
 
         public ProgressTask(int rand, int bet, String betType, String betNumbers) {
             this.rand = rand;
@@ -167,78 +170,89 @@ public class kazino extends JFrame {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - ivaylo
         panel1 = new JPanel();
-        progressBar1 = new JProgressBar();
         textField1 = new JTextField();
         button1 = new JButton();
+        progressBar1 = new JProgressBar();
         moneyLabel = new JLabel();
-        comboBox1 = new JComboBox();
         textField2 = new JTextField();
+        comboBox1 = new JComboBox(bet1);
 
         //======== panel1 ========
         {
             panel1.setBackground(Color.black);
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax
-            . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e" , javax. swing
-            .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .
-            Font ( "Dialo\u0067", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red
-            ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override
-            public void propertyChange (java . beans. PropertyChangeEvent e) { if( "borde\u0072" .equals ( e. getPropertyName (
-            ) ) )throw new RuntimeException( ) ;} } );
-
-            //---- progressBar1 ----
-            progressBar1.setBackground(new Color(0x333333));
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- textField1 ----
             textField1.setBackground(new Color(0x333333));
+            textField1.setAlignmentX(1.0F);
+            textField1.setForeground(Color.white);
+            textField1.setDisabledTextColor(Color.white);
+            textField1.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 
             //---- button1 ----
-            button1.setText("text");
             button1.setBackground(new Color(0x333333));
+            button1.setForeground(Color.white);
+
+            //---- progressBar1 ----
+            progressBar1.setBackground(new Color(0x333333));
+            progressBar1.setMaximumSize(new Dimension(32767, 999));
 
             //---- moneyLabel ----
             moneyLabel.setBackground(Color.white);
             moneyLabel.setForeground(Color.white);
 
+            //---- textField2 ----
+            textField2.setForeground(Color.white);
+            textField2.setBackground(new Color(0x333333));
+
+            //---- comboBox1 ----
+            comboBox1.setBackground(new Color(0x333333));
+            comboBox1.setFont(comboBox1.getFont().deriveFont(comboBox1.getFont().getSize() + 4f));
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap(26, Short.MAX_VALUE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap(103, Short.MAX_VALUE)
                         .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                                .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createParallelGroup()
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addComponent(comboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(button1)
-                                    .addGap(148, 148, 148))
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addComponent(progressBar1, GroupLayout.PREFERRED_SIZE, 388, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(65, 65, 65))
-                                .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(27, 27, 27)))))
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addGroup(panel1Layout.createSequentialGroup()
+                                        .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 124, GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, Short.MAX_VALUE)
+                                        .addComponent(comboBox1, GroupLayout.PREFERRED_SIZE, 138, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(button1, GroupLayout.PREFERRED_SIZE, 87, GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(progressBar1, GroupLayout.PREFERRED_SIZE, 547, GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(295, Short.MAX_VALUE))))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(progressBar1, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(textField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                            .addComponent(button1)
-                            .addComponent(comboBox1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44))
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(progressBar1, GroupLayout.PREFERRED_SIZE, 295, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                .addComponent(comboBox1, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textField1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(textField2, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+                            .addComponent(button1, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(55, Short.MAX_VALUE))
             );
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -247,11 +261,11 @@ public class kazino extends JFrame {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Evaluation license - ivaylo
     private JPanel panel1;
-    private JProgressBar progressBar1;
     private JTextField textField1;
     private JButton button1;
+    private JProgressBar progressBar1;
     private JLabel moneyLabel;
-    private JComboBox comboBox1;
     private JTextField textField2;
+    private JComboBox comboBox1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
