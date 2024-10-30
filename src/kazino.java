@@ -12,6 +12,7 @@ import com.intellij.uiDesigner.core.*;
 public class kazino extends JFrame {
     private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "6-Line (6 numbers)"};
+
     public kazino() {
         initComponents();
         JFrame frame = new JFrame("PichagaBET");
