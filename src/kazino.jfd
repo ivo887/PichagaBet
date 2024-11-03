@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {space ::683:x, comp moneyLabel:::p:190:p, space :p:72:p}, seq {par t {comp progressBar1:::p:547:p, seq t {space ::7:x, par t {comp textField2:::p:124:p, comp label1:::p:113:p}, space ::60:x, comp comboBox1:::p:138:p, space :::x, par l {comp label2:::p:121:p, comp textField1:::p:133:p}, space :::x, comp button1:::p:87:p}}, space ::384:x}}"
-			"$verticalGroup": "par l {seq t {space :p:88:p, comp moneyLabel:::p:63:p, space :p:8:p, comp progressBar1:::p:295:p, space s::32:x, par b {comp label2::b::37:x, comp label1::b:p:34:p}, space :0:0:p, par l {par b {comp comboBox1::b:p:60:p, comp textField1::b:p:50:p, comp textField2::b:p:60:p}, comp button1:::p:61:p}, space :p:56:p}}"
+			"$horizontalGroup": "par l {seq t {space :::x, comp moneyLabel:::p:190:p, space :p:72:p}, seq {space :::p, par l {seq l {comp progressBar1:::::x, space :p:17:p}, seq {par t {comp comboBox2::l::223:x, seq l {space :11:11:p, comp label1::::212:x}, comp textField2::l::223:x}, space :p:60:p, comp comboBox1::::210:x, space :::p, par l {comp label2::::212:x, comp textField1:::::x}, space :::p, comp button1::::212:x, space :p:10:p}}}}"
+			"$verticalGroup": "par l {seq t {space :p:88:p, comp moneyLabel:::p:63:p, space :p::p, comp progressBar1::::261:x, par l {seq {space :::p, comp label2::::33:x, space :::p, par l:::p {comp textField1::::74:x, comp button1::::74:x}}, seq t {space :p:14:p, comp label1:::::x, space :::x, par l:::p {comp textField2::::74:x, comp comboBox1::::74:x}}}, space :::p, comp comboBox2:::p:50:p, space ::47:x}}"
 		} ) {
 			name: "panel1"
 			"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -16,6 +16,7 @@ new FormModel {
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"disabledTextColor": new java.awt.Color( 255, 255, 255, 255 )
 				"cursor": new java.awt.Cursor( 2 )
+				"caretColor": new java.awt.Color( 255, 255, 255, 255 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
@@ -37,6 +38,7 @@ new FormModel {
 				name: "textField2"
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"background": new java.awt.Color( 51, 51, 51, 255 )
+				"caretColor": new java.awt.Color( 255, 255, 255, 255 )
 			} )
 			add( new FormComponent( "javax.swing.JComboBox" ) {
 				name: "comboBox1"
@@ -47,14 +49,21 @@ new FormModel {
 				name: "label1"
 				"text": "numbers:"
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 20, true )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "amount:"
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 20, true )
+			} )
+			add( new FormComponent( "javax.swing.JComboBox" ) {
+				name: "comboBox2"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
+			"location": new java.awt.Point( 70, 10 )
 			"size": new java.awt.Dimension( 945, 640 )
 		} )
 	}
