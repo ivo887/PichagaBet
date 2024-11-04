@@ -10,11 +10,15 @@ import javax.swing.SwingWorker;
 
 
 
+
 public class kazino extends JFrame {
     private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
     private String bet2[]={"1-18", "19-36"};
-    private String bet3[]={"Black", "Red"};
+    private String bet3[]={"Black", "Red", "Green"};
+    private RoulettePanel roulettePanel;
+    private Timer timer;
+    private int angle = 0;
 
     public kazino() {
         initComponents();
@@ -26,30 +30,72 @@ public class kazino extends JFrame {
         comboBox1.setForeground(Color.white);
         textField1.setCaretColor(Color.white);
         textField2.setCaretColor(Color.white);
+        roulettePanel = new RoulettePanel();
+        panel2.add(roulettePanel);
+        roulettePanel.setBackground(Color.darkGray);
 
-        // Set initial money display
+
         updateMoneyDisplay();
 
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int bet = Integer.parseInt(textField1.getText());
-                    String betNumbers = textField2.getText().trim(); // Get bet numbers
+                    String betNumbers = textField2.getText().trim();
                     if (bet > totalMoney || bet <= 0) {
                         JOptionPane.showMessageDialog(frame, "Invalid bet amount!");
                         return;
                     }
-                    totalMoney -= bet; // Deduct bet from total money
+                    totalMoney -= bet;
                     button1.setEnabled(false);
-                    progressBar1.setMaximum(36);
                     Random rand = new Random();
                     int rand_int1 = rand.nextInt(37);
-                    new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute(); // Pass bet type and numbers
+                    new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
                 }
             }
         });
+    }
+    private class RoulettePanel extends JPanel {
+        private final int NUM_SEGMENTS = 37; // 36 numbers + 0
+        private final Color[] COLORS = {
+                Color.GREEN,Color.RED,
+                Color.BLACK,Color.RED, Color.BLACK, Color.RED, Color.BLACK,
+                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
+                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK,
+                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
+                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK,
+                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
+                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK
+        };
+
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setBackground(Color.DARK_GRAY);
+
+            int diameter = Math.min(getWidth(), getHeight());
+            int radius = diameter / 2;
+
+            g2d.rotate(Math.toRadians(angle), getWidth() / 2, getHeight() / 2);
+
+            for (int i = 0; i < NUM_SEGMENTS; i++) {
+                g2d.setColor(COLORS[i]);
+                double startAngle = (360.0 / NUM_SEGMENTS) * i;
+                double arcAngle = (360.0 / NUM_SEGMENTS);
+                g2d.fillArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, (int) startAngle, (int) arcAngle);
+            }
+
+            g2d.setColor(Color.BLACK);
+            g2d.drawArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, 0, 360);
+        }
+
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(800, 800);
+        }
     }
 
     private void updateMoneyDisplay() {
@@ -68,6 +114,17 @@ public class kazino extends JFrame {
             this.bet = bet;
             this.betType = betType;
             this.betNumbers = betNumbers;
+            angle = 0;
+            timer = new Timer(10, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (angle < 720+rand*360/37) {
+                        angle += 4;
+                    }
+                    roulettePanel.repaint();
+                }
+            });
+            timer.start();
         }
 
         protected Void doInBackground() {
@@ -84,9 +141,7 @@ public class kazino extends JFrame {
 
         protected void process(List<Integer> chunks) {
             for (int value : chunks) {
-                progressBar1.setValue(value);
                 button1.setText(Integer.toString(value));
-                progressBar1.setForeground(value % 2 == 0 ? Color.black : Color.red);
             }
         }
 
@@ -96,6 +151,7 @@ public class kazino extends JFrame {
 
             // Split the input betNumbers to get the array of numbers
             String[] numbersArray = betNumbers.split(",");
+
             for (String number : numbersArray) {
                 try {
                     int chosenNumber = Integer.parseInt(number.trim());
@@ -142,13 +198,6 @@ public class kazino extends JFrame {
                                 totalMoney += bet * 8;
                             }
                             break;
-                        case "6-Line (6 numbers)":
-                            if (numbersArray.length <= 6 &&
-                                    (rand <= 6)) { // For simplicity, assume 1-6 are valid
-                                win = true;
-                                totalMoney += bet * 5;
-                            }
-                            break;
                         case "Color(Black or Red)":
                             if(comboBox2.getSelectedItem().equals("Black") && rand % 2 == 0) {
                                 win = true;
@@ -178,7 +227,9 @@ public class kazino extends JFrame {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(kazino::new);
+
     }
+
 
     // JFormDesigner - Variables declaration - DO NOT MODI
 
@@ -188,23 +239,22 @@ public class kazino extends JFrame {
         panel1 = new JPanel();
         textField1 = new JTextField();
         button1 = new JButton();
-        progressBar1 = new JProgressBar();
         moneyLabel = new JLabel();
         textField2 = new JTextField();
         comboBox1 = new JComboBox(bet1);
         label1 = new JLabel();
         label2 = new JLabel();
         comboBox2 = new JComboBox(bet3);
+        panel2 = new JPanel();
 
         //======== panel1 ========
         {
             panel1.setBackground(Color.black);
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border
-            .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax
-            . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,
-            12 ) ,java . awt. Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans
-            .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e.
-            getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+            0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+            .BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.
+            red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+            beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             //---- textField1 ----
             textField1.setBackground(new Color(0x333333));
@@ -218,10 +268,6 @@ public class kazino extends JFrame {
             button1.setBackground(new Color(0x333333));
             button1.setForeground(Color.white);
             button1.setText("BET");
-
-            //---- progressBar1 ----
-            progressBar1.setBackground(new Color(0x333333));
-            progressBar1.setMaximumSize(new Dimension(32767, 999));
 
             //---- moneyLabel ----
             moneyLabel.setBackground(Color.white);
@@ -250,6 +296,13 @@ public class kazino extends JFrame {
             comboBox2.setBackground(new Color(0x333333));
             comboBox2.setForeground(Color.white);
 
+            //======== panel2 ========
+            {
+                panel2.setBackground(new Color(0x333333));
+                panel2.setForeground(new Color(0x333333));
+                panel2.setLayout(new GridLayout());
+            }
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
@@ -261,51 +314,46 @@ public class kazino extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(progressBar1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(17, 17, 17))
+                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
-                                    .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
-                                        .addGap(11, 11, 11)
-                                        .addComponent(label1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE))
-                                    .addComponent(textField2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
+                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                                    .addComponent(textField2, GroupLayout.Alignment.LEADING)
+                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                    .addComponent(textField1))
+                                    .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
-                                .addGap(10, 10, 10))))
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                        .addGap(10, 10, 10))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(progressBar1, GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
-                        .addGroup(panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textField2, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                     .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                    .addComponent(button1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField2, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                    .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
+                                    .addComponent(button1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comboBox2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(26, 26, 26))
             );
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
@@ -316,12 +364,12 @@ public class kazino extends JFrame {
     private JPanel panel1;
     private JTextField textField1;
     private JButton button1;
-    private JProgressBar progressBar1;
     private JLabel moneyLabel;
     private JTextField textField2;
     private JComboBox comboBox1;
     private JLabel label1;
     private JLabel label2;
     private JComboBox comboBox2;
+    private JPanel panel2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
