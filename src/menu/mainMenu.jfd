@@ -3,14 +3,18 @@ JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.4" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:398:x}"
-			"$verticalGroup": "par l {space :0:263:x}"
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :p:31:p, comp button1:::p::p, space ::91:x}}"
+			"$verticalGroup": "par l {seq l {space :p:54:p, comp button1:::p::p, space ::112:x}}"
 		} ) {
-			name: "this"
+			name: "panel1"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Roulete"
+			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"location": new java.awt.Point( 45, 30 )
+			"size": new java.awt.Dimension( 200, 200 )
 		} )
 	}
 }
