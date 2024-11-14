@@ -237,7 +237,7 @@ public class kazino extends JFrame {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - martin kov
+        // Generated using JFormDesigner Educational license - Ivaylo Yordanov (ivayloay)
         panel1 = new JPanel();
         textField1 = new JTextField();
         button1 = new JButton();
@@ -252,11 +252,6 @@ public class kazino extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(Color.black);
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder (
-            0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder
-            . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .
-            red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java .
-            beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //---- textField1 ----
             textField1.setBackground(new Color(0x333333));
@@ -316,20 +311,20 @@ public class kazino extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 1224, Short.MAX_VALUE)
+                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 1049, Short.MAX_VALUE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                                     .addComponent(textField2, GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
-                                    .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE))
+                                    .addComponent(textField1)
+                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)))
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(10, 10, 10))
             );
             panel1Layout.setVerticalGroup(
@@ -338,7 +333,7 @@ public class kazino extends JFrame {
                         .addGap(88, 88, 88)
                         .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 364, Short.MAX_VALUE)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
@@ -362,7 +357,7 @@ public class kazino extends JFrame {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - martin kov
+    // Generated using JFormDesigner Educational license - Ivaylo Yordanov (ivayloay)
     private JPanel panel1;
     private JTextField textField1;
     private JButton button1;
