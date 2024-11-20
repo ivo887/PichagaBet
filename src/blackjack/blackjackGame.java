@@ -7,224 +7,194 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-// Main Blackjack Game class with GUI and Dealer integration
 public class blackjackGame extends JFrame {
+    private Deck deck;
     private Dealer dealer;
     private Player player;
-    private int cards = 52;
 
     public blackjackGame() {
-        dealer = new Dealer();
-        player = new Player();
+        deck = new Deck();
+        dealer = new Dealer(deck);
+        player = new Player(deck);
         initComponents();
     }
 
     private void initComponents() {
-        panel1 = new JPanel();
-        dealButton = new JButton("Deal Card to Dealer");
-        dealerHandLabel = new JLabel("Dealer's Hand: ");
+        JPanel panel = new JPanel();
+        JButton dealToPlayerButton = new JButton("Deal to Player");
+     //   JButton dealToDealerButton = new JButton("Deal to Dealer");
+        JButton standButton = new JButton("Stand");
+        JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
+        JLabel playerHandLabel = new JLabel("Player's Hand: ");
 
-        //======== panel1 ========
-        {
-            panel1.setLayout(new BorderLayout());
-            panel1.add(dealButton, BorderLayout.SOUTH);
-            panel1.add(dealerHandLabel, BorderLayout.CENTER);
-        }
+        // Panel layout
+        panel.setLayout(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        buttonPanel.add(dealToPlayerButton);
+    //    buttonPanel.add(dealToDealerButton);
+        buttonPanel.add(standButton);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
+        panel.add(dealerHandLabel, BorderLayout.NORTH);
+        panel.add(playerHandLabel, BorderLayout.CENTER);
 
-        // Set up button action
-        dealButton.addActionListener(e -> dealToDealer());
+        // Button actions
+        dealToPlayerButton.addActionListener(e -> {
+            player.drawCard();
+            updateHandLabel(playerHandLabel, player.getHand(), "Player");
+            if (player.getHandValue() > 21) {
+                JOptionPane.showMessageDialog(this, "Dealer wins.");
+                resetGame();
+            }
+        });
 
-        // Configure the main frame
+//        dealToDealerButton.addActionListener(e -> {
+//            dealer.drawCard();
+//            updateHandLabel(dealerHandLabel, dealer.getHand(), "Dealer");
+//            if (dealer.getHandValue() >= 17) {
+//                JOptionPane.showMessageDialog(this, "Dealer stands.");
+//            }
+//        });
+
+        standButton.addActionListener(e -> {
+            while (dealer.getHandValue() < 17) {
+                dealer.drawCard();
+            }
+            updateHandLabel(dealerHandLabel, dealer.getHand(), "Dealer");
+            determineWinner();
+        });
+
+        // Frame configuration
         setTitle("Blackjack Game");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 300);
-        add(panel1);
+        add(panel);
     }
 
-
-
-    private void dealToDealer() {
-        dealer.drawCard();
-        updateDealerHand();
-        if (dealer.getHandValue() >= 21) {
-            JOptionPane.showMessageDialog(this, "Dealer stands with hand value: " + dealer.getHandValue());
+    private void updateHandLabel(JLabel label, List<Card> hand, String owner) {
+        StringBuilder text = new StringBuilder(owner + "'s Hand: ");
+        for (Card card : hand) {
+            text.append(card).append(" ");
         }
+        int totalValue = owner.equals("Dealer") ? dealer.getHandValue() : player.getHandValue();
+        text.append("(Total: ").append(totalValue).append(")");
+        label.setText(text.toString());
     }
 
-    private void dealToPlayer() {
-        player.drawCard();
-        updatePlayerHand();
-        if (player.getHandValue() >= 21) {
-            JOptionPane.showMessageDialog(this, "Player stands with hand value: " + player.getHandValue());
+    private void determineWinner() {
+        int playerValue = player.getHandValue();
+        int dealerValue = dealer.getHandValue();
+
+        if (dealerValue > 21 || (playerValue <= 21 && playerValue > dealerValue)) {
+            JOptionPane.showMessageDialog(this, "Player wins!");
+        } else if (playerValue > 21 || dealerValue > playerValue) {
+            JOptionPane.showMessageDialog(this, "Dealer wins!");
+        } else {
+            JOptionPane.showMessageDialog(this, "It's a tie!");
         }
-    }
-    private void updatePlayerHand() {
-        StringBuilder handText = new StringBuilder("Player's Hand: ");
-        for (Card card : player.getPlayerHand()) {
-            handText.append(card).append(" ");
-        }
-        handText.append("(Total: ").append(player.getHandValue()).append(")");
-        playerHandLabel.setText(handText.toString());
+        resetGame();
     }
 
-    private void updateDealerHand() {
-        StringBuilder handText = new StringBuilder("Dealer's Hand: ");
-        for (Card card : dealer.getDealerHand()) {
-            handText.append(card).append(" ");
-        }
-        handText.append("(Total: ").append(dealer.getHandValue()).append(")");
-        dealerHandLabel.setText(handText.toString());
+    private void resetGame() {
+        deck.reset();
+        dealer.resetHand();
+        player.resetHand();
     }
 
-    // Main method to run the game
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new blackjackGame().setVisible(true));
     }
 
-    // JFormDesigner - Variables declaration
-    private JPanel panel1;
-    private JButton dealButton;
-    private JLabel dealerHandLabel;
-    private JLabel playerHandLabel;
+    // Shared Deck class
+    static class Deck {
+        private List<Card> cards;
 
-
-
-
-    class Player {
-        private List<Card> deck;
-        private List<Card> playerHand;
-
-        public Player() {
-            this.deck = new ArrayList<>();
-            this.playerHand = new ArrayList<>();
-            initializeDeck();
-            shuffleDeck();
+        public Deck() {
+            cards = new ArrayList<>();
+            initialize();
+            shuffle();
         }
 
-        // Initialize a standard 52-card deck
-        private void initializeDeck() {
+        private void initialize() {
             for (Suit suit : Suit.values()) {
                 for (Rank rank : Rank.values()) {
-                    deck.add(new Card(rank, suit));
+                    cards.add(new Card(rank, suit));
                 }
             }
         }
 
-        // Shuffle the deck
-        public void shuffleDeck() {
-            Collections.shuffle(deck, new Random());
+        public void shuffle() {
+            Collections.shuffle(cards, new Random());
         }
 
-        // Deal a card from the deck
-        public Card dealCard() {
-            if (deck.isEmpty()) {
-                initializeDeck();
-                shuffleDeck();
+        public Card draw() {
+            if (cards.isEmpty()) {
+                initialize();
+                shuffle();
             }
-            return deck.remove(deck.size() - 1);
+            return cards.remove(cards.size() - 1);
         }
 
-        // Dealer adds a card to their hand
+        public void reset() {
+            cards.clear();
+            initialize();
+            shuffle();
+        }
+    }
+
+    // Dealer class
+    static class Dealer {
+        private List<Card> hand;
+        private Deck deck;
+
+        public Dealer(Deck deck) {
+            this.deck = deck;
+            this.hand = new ArrayList<>();
+        }
+
         public void drawCard() {
-            playerHand.add(dealCard());
+            hand.add(deck.draw());
         }
 
-        // Get the total value of the dealer's hand
+        public List<Card> getHand() {
+            return hand;
+        }
+
         public int getHandValue() {
+            return calculateHandValue();
+        }
+
+        private int calculateHandValue() {
             int value = 0;
             int aces = 0;
 
-            for (Card card : playerHand) {
+            for (Card card : hand) {
                 value += card.getValue();
                 if (card.getRank() == Rank.ACE) {
                     aces++;
                 }
             }
 
-            // Adjust for Aces (1 or 11)
             while (value > 21 && aces > 0) {
                 value -= 10;
                 aces--;
             }
-
             return value;
         }
 
-        // Accessor for the dealer's hand
-        public List<Card> getDealerHand() {
-            return playerHand;
+        public void resetHand() {
+            hand.clear();
         }
     }
 
-    // Inner Dealer class
-    class Dealer {
-        private List<Card> deck;
-        private List<Card> dealerHand;
-
-        public Dealer() {
-            this.deck = new ArrayList<>();
-            this.dealerHand = new ArrayList<>();
-            initializeDeck();
-            shuffleDeck();
-        }
-
-        // Initialize a standard 52-card deck
-        private void initializeDeck() {
-            for (Suit suit : Suit.values()) {
-                for (Rank rank : Rank.values()) {
-                    deck.add(new Card(rank, suit));
-                }
-            }
-        }
-
-        // Shuffle the deck
-        public void shuffleDeck() {
-            Collections.shuffle(deck, new Random());
-        }
-
-        // Deal a card from the deck
-        public Card dealCard() {
-            if (deck.isEmpty()) {
-                initializeDeck();
-                shuffleDeck();
-            }
-            return deck.remove(deck.size() - 1);
-        }
-
-        // Dealer adds a card to their hand
-        public void drawCard() {
-            dealerHand.add(dealCard());
-        }
-
-        // Get the total value of the dealer's hand
-        public int getHandValue() {
-            int value = 0;
-            int aces = 0;
-
-            for (Card card : dealerHand) {
-                value += card.getValue();
-                if (card.getRank() == Rank.ACE) {
-                    aces++;
-                }
-            }
-
-            // Adjust for Aces (1 or 11)
-            while (value > 21 && aces > 0) {
-                value -= 10;
-                aces--;
-            }
-
-            return value;
-        }
-
-        // Accessor for the dealer's hand
-        public List<Card> getDealerHand() {
-            return dealerHand;
+    // Player class
+    static class Player extends Dealer {
+        public Player(Deck deck) {
+            super(deck);
         }
     }
 
-    // Inner Card class
-    class Card {
+    // Card class
+    static class Card {
         private final Rank rank;
         private final Suit suit;
 
@@ -268,3 +238,4 @@ public class blackjackGame extends JFrame {
         }
     }
 }
+

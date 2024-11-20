@@ -4,13 +4,17 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq l {space :p:31:p, comp button1:::p::p, space ::91:x}}"
-			"$verticalGroup": "par l {seq l {space :p:54:p, comp button1:::p::p, space ::112:x}}"
+			"$horizontalGroup": "par l {seq {space :31:31:p, par l {comp button1::l:p::p, comp button2:::p::p}, space ::89:x}}"
+			"$verticalGroup": "par l {seq l {space :p:54:p, comp button1:::p::p, space :p:54:p, comp button2:::p::p, space ::24:x}}"
 		} ) {
 			name: "panel1"
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Roulete"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Blackjack"
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 45, 30 )
