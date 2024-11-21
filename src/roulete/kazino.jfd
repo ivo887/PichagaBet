@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {space :::x, comp moneyLabel:::p:190:p, space :p:72:p}, seq l {space :::p, par l {comp panel2::::1049:x, seq {par t {comp comboBox2::l::388:x, comp textField2::l:::x, comp label1::t:::x}, space :p:60:p, comp comboBox1::::378:x, space :::p, par l {comp textField1:::::x, comp label2:::::x}, space :::p, comp button1:::::x}}, space :p:10:p}}"
-			"$verticalGroup": "par l {seq t {space :p:88:p, comp moneyLabel:::p:63:p, space :p:21:p, comp panel2::::289:x, space :::p, par t:::p {seq t {comp label1:::p:56:p, space :::p, par l:::p {comp textField2::::74:x, comp comboBox1::::74:x}}, seq t {comp label2::::56:x, space :::p, par l:::p {comp textField1::::74:x, comp button1::::74:x}}}, space :::p, comp comboBox2:::p:50:p, space :p:26:p}}"
+			"$horizontalGroup": "par l {seq t {space :::x, comp moneyLabel:::p:190:p, space :p:72:p}, seq l {space :::p, par l {comp panel2::::599:x, seq {par t {comp comboBox2::l::191:x, comp textField2::l:::x, comp label1::t:::x}, space :p:60:p, comp comboBox1::::180:x, space :::p, par l {comp textField1:::::x, comp label2:::::x}, space :::p, comp button1:::::x}}, space :p:10:p}}"
+			"$verticalGroup": "par l {seq t {space :p:88:p, comp moneyLabel:::p:63:p, space :p:21:p, comp panel2:::::x, space :::p, par t:::p {seq t {comp label1:::p:56:p, space :::p, par l:::p {comp textField2::::74:x, comp comboBox1::::74:x}}, seq t {comp label2::::56:x, space :::p, par l:::p {comp textField1::::74:x, comp button1::::74:x}}}, space :::p, comp comboBox2:::p:50:p, space :p:26:p}}"
 		} ) {
 			name: "panel1"
 			"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -63,8 +63,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 70, 10 )
-			"size": new java.awt.Dimension( 1065, 685 )
+			"location": new java.awt.Point( 25, 5 )
+			"size": new java.awt.Dimension( 615, 375 )
 		} )
 	}
 }

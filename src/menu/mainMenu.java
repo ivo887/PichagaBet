@@ -4,6 +4,7 @@
 
 package menu;
 
+import java.awt.*;
 import roulete.kazino;
 import blackjack.blackjackGame;
 
@@ -17,6 +18,8 @@ import java.util.Random;
  * @author martbul
  */
 public class mainMenu extends JFrame {
+    public int totalMoney = 100; // Starting money// Combo box for betting options
+
     //private MenuListener listener;
     public mainMenu() {
         initComponents();
@@ -31,7 +34,7 @@ public class mainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
 
-                new kazino();
+                new kazino(totalMoney);
             }
         });
 
@@ -40,7 +43,7 @@ public class mainMenu extends JFrame {
                 frame.setVisible(false);
 
 
-                blackjackGame game = new blackjackGame();
+                blackjackGame game = new blackjackGame(totalMoney);
                 game.setVisible(true);
             }
         });
@@ -58,32 +61,37 @@ public class mainMenu extends JFrame {
 
         //======== panel1 ========
         {
+            panel1.setBackground(Color.black);
 
             //---- button1 ----
             button1.setText("Roulete");
+            button1.setForeground(Color.white);
+            button1.setBackground(new Color(0x333333));
 
             //---- button2 ----
             button2.setText("Blackjack");
+            button2.setBackground(new Color(0x333333));
+            button2.setForeground(Color.white);
 
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(button1)
-                            .addComponent(button2))
-                        .addContainerGap(89, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(button1, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                            .addComponent(button2, GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                        .addGap(50, 50, 50))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(button1)
-                        .addGap(54, 54, 54)
-                        .addComponent(button2)
-                        .addContainerGap(24, Short.MAX_VALUE))
+                        .addGap(50, 50, 50)
+                        .addComponent(button1, GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(button2, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+                        .addGap(161, 161, 161))
             );
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

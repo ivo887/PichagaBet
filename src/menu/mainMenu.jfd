@@ -4,21 +4,26 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :31:31:p, par l {comp button1::l:p::p, comp button2:::p::p}, space ::89:x}}"
-			"$verticalGroup": "par l {seq l {space :p:54:p, comp button1:::p::p, space :p:54:p, comp button2:::p::p, space ::24:x}}"
+			"$horizontalGroup": "par l {seq {space :p:50:p, par t {comp button1::::350:x, comp button2::::350:x}, space :p:50:p}}"
+			"$verticalGroup": "par l {seq l {space :p:50:p, comp button1::::42:x, space s:::p, comp button2::::49:x, space :p:161:p}}"
 		} ) {
 			name: "panel1"
+			"background": new java.awt.Color( 0, 0, 0, 255 )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Roulete"
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				"background": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "Blackjack"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 45, 30 )
-			"size": new java.awt.Dimension( 200, 200 )
+			"size": new java.awt.Dimension( 450, 320 )
 		} )
 	}
 }

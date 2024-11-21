@@ -11,8 +11,11 @@ public class blackjackGame extends JFrame {
     private Deck deck;
     private Dealer dealer;
     private Player player;
+    public int totalMoney;
 
-    public blackjackGame() {
+    public blackjackGame(int totalMoney) {
+        this.totalMoney = totalMoney;
+
         deck = new Deck();
         dealer = new Dealer(deck);
         player = new Player(deck);
@@ -26,6 +29,7 @@ public class blackjackGame extends JFrame {
         JButton standButton = new JButton("Stand");
         JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
         JLabel playerHandLabel = new JLabel("Player's Hand: ");
+        JLabel totalMoneyLabel = new JLabel(totalMoney + " $");
 
         // Panel layout
         panel.setLayout(new BorderLayout());
@@ -36,6 +40,7 @@ public class blackjackGame extends JFrame {
         panel.add(buttonPanel, BorderLayout.SOUTH);
         panel.add(dealerHandLabel, BorderLayout.NORTH);
         panel.add(playerHandLabel, BorderLayout.CENTER);
+        panel.add(totalMoneyLabel, BorderLayout.PAGE_END);
 
         // Button actions
         dealToPlayerButton.addActionListener(e -> {
@@ -46,14 +51,6 @@ public class blackjackGame extends JFrame {
                 resetGame();
             }
         });
-
-//        dealToDealerButton.addActionListener(e -> {
-//            dealer.drawCard();
-//            updateHandLabel(dealerHandLabel, dealer.getHand(), "Dealer");
-//            if (dealer.getHandValue() >= 17) {
-//                JOptionPane.showMessageDialog(this, "Dealer stands.");
-//            }
-//        });
 
         standButton.addActionListener(e -> {
             while (dealer.getHandValue() < 17) {
@@ -100,11 +97,7 @@ public class blackjackGame extends JFrame {
         player.resetHand();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new blackjackGame().setVisible(true));
-    }
 
-    // Shared Deck class
     static class Deck {
         private List<Card> cards;
 
@@ -141,7 +134,7 @@ public class blackjackGame extends JFrame {
         }
     }
 
-    // Dealer class
+
     static class Dealer {
         private List<Card> hand;
         private Deck deck;
@@ -186,14 +179,14 @@ public class blackjackGame extends JFrame {
         }
     }
 
-    // Player class
+
     static class Player extends Dealer {
         public Player(Deck deck) {
             super(deck);
         }
     }
 
-    // Card class
+
     static class Card {
         private final Rank rank;
         private final Suit suit;
@@ -217,12 +210,11 @@ public class blackjackGame extends JFrame {
         }
     }
 
-    // Enum for card suits
+
     enum Suit {
         HEARTS, DIAMONDS, CLUBS, SPADES;
     }
 
-    // Enum for card ranks
     enum Rank {
         TWO(2), THREE(3), FOUR(4), FIVE(5), SIX(6), SEVEN(7), EIGHT(8), NINE(9), TEN(10),
         JACK(10), QUEEN(10), KING(10), ACE(11);
@@ -237,5 +229,11 @@ public class blackjackGame extends JFrame {
             return value;
         }
     }
+
+
+    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
+    // Generated using JFormDesigner Educational license - Ivaylo Yordanov (ivayloay)
+    private JPanel panel1;
+    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
 

@@ -14,15 +14,17 @@ import javax.swing.SwingWorker;
 
 
 public class kazino extends JFrame {
-    private int totalMoney = 100; // Starting money// Combo box for betting options
+   // private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
     private String bet2[]={"1-18", "19-36"};
     private String bet3[]={"Black", "Red", "Green"};
     private RoulettePanel roulettePanel;
     private Timer timer;
     private int angle = 0;
+    public int totalMoney;
 
-    public kazino() {
+    public kazino(int totalMoney) {
+        this.totalMoney = totalMoney;
         initComponents();
         JFrame frame = new JFrame("PichagaBET");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,11 +46,11 @@ public class kazino extends JFrame {
                 try {
                     int bet = Integer.parseInt(textField1.getText());
                     String betNumbers = textField2.getText().trim();
-                    if (bet > totalMoney || bet <= 0) {
+                    if (bet > kazino.this.totalMoney || bet <= 0) {
                         JOptionPane.showMessageDialog(frame, "Invalid bet amount!");
                         return;
                     }
-                    totalMoney -= bet;
+                    kazino.this.totalMoney -= bet;
                     button1.setEnabled(false);
                     Random rand = new Random();
                     int rand_int1 = rand.nextInt(37);
@@ -227,10 +229,7 @@ public class kazino extends JFrame {
     }
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(kazino::new);
 
-    }
 
 
     // JFormDesigner - Variables declaration - DO NOT MODI
@@ -311,14 +310,14 @@ public class kazino extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 1049, Short.MAX_VALUE)
+                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
                                     .addComponent(textField2, GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(textField1)
@@ -333,7 +332,7 @@ public class kazino extends JFrame {
                         .addGap(88, 88, 88)
                         .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 289, Short.MAX_VALUE)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
