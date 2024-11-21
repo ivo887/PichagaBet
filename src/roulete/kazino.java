@@ -79,6 +79,9 @@ public class kazino extends JFrame {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
             g2d.setBackground(Color.DARK_GRAY);
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/64, getHeight()/64, getHeight()/64);
+
 
             int diameter = Math.min(getWidth(), getHeight());
             int radius = diameter / 2;
@@ -310,14 +313,14 @@ public class kazino extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
+                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                                     .addComponent(textField2, GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(textField1)

@@ -230,10 +230,5 @@ public class blackjackGame extends JFrame {
         }
     }
 
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Educational license - Ivaylo Yordanov (ivayloay)
-    private JPanel panel1;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
 
