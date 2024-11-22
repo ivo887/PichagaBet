@@ -31,12 +31,12 @@ public class kazino extends JFrame {
         frame.setSize(500, 500);
         frame.add(this.panel1);
         frame.setVisible(true);
-        comboBox1.setForeground(Color.white);
-        textField1.setCaretColor(Color.white);
-        textField2.setCaretColor(Color.white);
+        comboBox1.setForeground(java.awt.Color.WHITE);
+        textField1.setCaretColor(java.awt.Color.white);
+        numbers.setCaretColor(java.awt.Color.white);
         roulettePanel = new RoulettePanel();
         panel2.add(roulettePanel);
-        roulettePanel.setBackground(Color.darkGray);
+        roulettePanel.setBackground(java.awt.Color.darkGray);
 
 
         updateMoneyDisplay();
@@ -45,7 +45,7 @@ public class kazino extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int bet = Integer.parseInt(textField1.getText());
-                    String betNumbers = textField2.getText().trim();
+                    String betNumbers = numbers.getText().trim();
                     if (bet > kazino.this.totalMoney || bet <= 0) {
                         JOptionPane.showMessageDialog(frame, "Invalid bet amount!");
                         return;
@@ -64,22 +64,22 @@ public class kazino extends JFrame {
     private class RoulettePanel extends JPanel {
         private final int NUM_SEGMENTS = 37; // 36 numbers + 0
         private final Color[] COLORS = {
-                Color.GREEN,Color.RED,
-                Color.BLACK,Color.RED, Color.BLACK, Color.RED, Color.BLACK,
-                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
-                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK,
-                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
-                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK,
-                Color.RED, Color.BLACK, Color.RED, Color.BLACK, Color.RED,
-                Color.BLACK, Color.RED, Color.BLACK, Color.RED, Color.BLACK
+                java.awt.Color.green, java.awt.Color.red,
+                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
+                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
+                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
+                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
+                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
+                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
+                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
         };
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setBackground(Color.DARK_GRAY);
-            g2d.setColor(Color.WHITE);
+            g2d.setBackground(java.awt.Color.darkGray);
+            g2d.setColor(java.awt.Color.white);
             g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/64, getHeight()/64, getHeight()/64);
 
 
@@ -95,7 +95,7 @@ public class kazino extends JFrame {
                 g2d.fillArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, (int) startAngle, (int) arcAngle);
             }
 
-            g2d.setColor(Color.BLACK);
+            g2d.setColor(java.awt.Color.black);
             g2d.drawArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, 0, 360);
         }
 
@@ -161,60 +161,66 @@ public class kazino extends JFrame {
 
             for (String number : numbersArray) {
                 try {
-                    int chosenNumber = Integer.parseInt(number.trim());
-                    if (chosenNumber < 0 || chosenNumber > 36&& !betType.equals("Color(Black or Red)")) {
-                        JOptionPane.showMessageDialog(null, "Please enter valid numbers (0-36).");
-                        return;
+
+                    if(betType!="Color(Black or Red)"){
+                        int chosenNumber = Integer.parseInt(number.trim());
+                        if (chosenNumber < 0 || chosenNumber > 36&& !betType.equals("Color(Black or Red)")) {
+                            JOptionPane.showMessageDialog(null, "Please enter valid numbers (0-36).");
+                            return;
+                        }
+                        int payoutMultiplier = 0;
+
+                        switch (betType) {
+                            case "Straight Up (1 number)":
+                                payoutMultiplier = 35;
+                                if (rand == chosenNumber) {
+                                    win = true;
+                                    totalMoney += bet * payoutMultiplier;
+                                }
+                                break;
+                            case "Split (2 numbers)":
+                                payoutMultiplier = 17;
+                                if (rand == chosenNumber || (numbersArray.length == 2 &&
+                                        (rand == Integer.parseInt(numbersArray[0].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[1].trim())))) {
+                                    win = true;
+                                    totalMoney += bet * payoutMultiplier;
+                                }
+                                break;
+                            case "Street (3 numbers)":
+                                if (numbersArray.length == 3 &&
+                                        (rand == Integer.parseInt(numbersArray[0].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[1].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[2].trim()))) {
+                                    win = true;
+                                    totalMoney += bet * 11;
+                                }
+                                break;
+                            case "Corner (4 numbers)":
+                                if (numbersArray.length == 4 &&
+                                        (rand == Integer.parseInt(numbersArray[0].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[1].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[2].trim()) ||
+                                                rand == Integer.parseInt(numbersArray[3].trim()))) {
+                                    win = true;
+                                    totalMoney += bet * 8;
+                                }
+                                break;
+
+                        }
                     }
+                    else{
+                        if(Colors1.getSelectedItem().equals("Black") && rand % 2 == 0) {
+                            win = true;
+                            totalMoney += bet * 2;
+                        } else if(Colors1.getSelectedItem().equals("Red") && rand % 2 != 0) {
+                            win = true;
+                            totalMoney += bet * 2;
+                        }
+                    }
+
                     // Determine payout based on the bet type
-                    int payoutMultiplier = 0;
 
-                    switch (betType) {
-                        case "Straight Up (1 number)":
-                            payoutMultiplier = 35;
-                            if (rand == chosenNumber) {
-                                win = true;
-                                totalMoney += bet * payoutMultiplier;
-                            }
-                            break;
-                        case "Split (2 numbers)":
-                            payoutMultiplier = 17;
-                            if (rand == chosenNumber || (numbersArray.length == 2 &&
-                                    (rand == Integer.parseInt(numbersArray[0].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[1].trim())))) {
-                                win = true;
-                                totalMoney += bet * payoutMultiplier;
-                            }
-                            break;
-                        case "Street (3 numbers)":
-                            if (numbersArray.length == 3 &&
-                                    (rand == Integer.parseInt(numbersArray[0].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[1].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[2].trim()))) {
-                                win = true;
-                                totalMoney += bet * 11;
-                            }
-                            break;
-                        case "Corner (4 numbers)":
-                            if (numbersArray.length == 4 &&
-                                    (rand == Integer.parseInt(numbersArray[0].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[1].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[2].trim()) ||
-                                            rand == Integer.parseInt(numbersArray[3].trim()))) {
-                                win = true;
-                                totalMoney += bet * 8;
-                            }
-                            break;
-                        case "Color(Black or Red)":
-                            if(comboBox2.getSelectedItem().equals("Black") && rand % 2 == 0) {
-                                win = true;
-                                totalMoney += bet * 2;
-                            } else if(comboBox2.getSelectedItem().equals("Red") && rand % 2 != 0) {
-                                win = true;
-                                totalMoney += bet * 2;
-                            }
-
-                    }
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(null, "Please enter valid numbers.");
                     return;
@@ -232,7 +238,13 @@ public class kazino extends JFrame {
     }
 
 
-
+/*    private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
+    private String bet2[]={"1-18", "19-36"};
+    private String bet3[]={"Black", "Red", "Green"};
+    private RoulettePanel roulettePanel;
+    private Timer timer;
+    private int angle = 0;
+    public int totalMoney;*/
 
 
     // JFormDesigner - Variables declaration - DO NOT MODI
@@ -244,11 +256,11 @@ public class kazino extends JFrame {
         textField1 = new JTextField();
         button1 = new JButton();
         moneyLabel = new JLabel();
-        textField2 = new JTextField();
-        comboBox1 = new JComboBox();
+        numbers = new JTextField();
+        comboBox1 = new JComboBox(bet1);
         label1 = new JLabel();
         label2 = new JLabel();
-        comboBox2 = new JComboBox();
+        Colors1 = new JComboBox(bet3);
         panel2 = new JPanel();
 
         //======== panel1 ========
@@ -272,10 +284,10 @@ public class kazino extends JFrame {
             moneyLabel.setBackground(Color.white);
             moneyLabel.setForeground(Color.white);
 
-            //---- textField2 ----
-            textField2.setForeground(Color.white);
-            textField2.setBackground(new Color(0x333333));
-            textField2.setCaretColor(Color.white);
+            //---- numbers ----
+            numbers.setForeground(Color.white);
+            numbers.setBackground(new Color(0x333333));
+            numbers.setCaretColor(Color.white);
 
             //---- comboBox1 ----
             comboBox1.setBackground(new Color(0x333333));
@@ -291,9 +303,9 @@ public class kazino extends JFrame {
             label2.setForeground(Color.white);
             label2.setFont(label2.getFont().deriveFont(20f));
 
-            //---- comboBox2 ----
-            comboBox2.setBackground(new Color(0x333333));
-            comboBox2.setForeground(Color.white);
+            //---- Colors1 ----
+            Colors1.setBackground(new Color(0x333333));
+            Colors1.setForeground(Color.white);
 
             //======== panel2 ========
             {
@@ -316,11 +328,11 @@ public class kazino extends JFrame {
                             .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(comboBox2, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
-                                    .addComponent(textField2, GroupLayout.Alignment.LEADING)
+                                    .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                    .addComponent(numbers, GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(textField1)
@@ -342,7 +354,7 @@ public class kazino extends JFrame {
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(textField2, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(numbers, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                     .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addComponent(label2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
@@ -351,7 +363,7 @@ public class kazino extends JFrame {
                                     .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
                                     .addComponent(button1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboBox2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Colors1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26))
             );
         }
@@ -364,11 +376,11 @@ public class kazino extends JFrame {
     private JTextField textField1;
     private JButton button1;
     private JLabel moneyLabel;
-    private JTextField textField2;
+    private JTextField numbers;
     private JComboBox comboBox1;
     private JLabel label1;
     private JLabel label2;
-    private JComboBox comboBox2;
+    private JComboBox Colors1;
     private JPanel panel2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
