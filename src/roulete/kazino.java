@@ -80,7 +80,7 @@ public class kazino extends JFrame {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setBackground(java.awt.Color.darkGray);
             g2d.setColor(java.awt.Color.white);
-            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/64, getHeight()/64, getHeight()/64);
+            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/32, getHeight()/64, getHeight()/64);
 
 
             int diameter = Math.min(getWidth(), getHeight());
@@ -121,17 +121,6 @@ public class kazino extends JFrame {
             this.bet = bet;
             this.betType = betType;
             this.betNumbers = betNumbers;
-            angle = 0;
-            timer = new Timer(10, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (angle < 720+rand*360/37) {
-                        angle += 4;
-                    }
-                    roulettePanel.repaint();
-                }
-            });
-            timer.start();
         }
 
         protected Void doInBackground() {
@@ -143,10 +132,22 @@ public class kazino extends JFrame {
                     e.printStackTrace();
                 }
             }
+
             return null;
         }
 
         protected void process(List<Integer> chunks) {
+            angle = 0;
+            timer = new Timer(10, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (angle < rand*360/37) {
+                        angle += 1;
+                    }
+                    roulettePanel.repaint();
+                }
+            });
+            timer.start();
             for (int value : chunks) {
                 button1.setText(Integer.toString(value));
             }
@@ -257,10 +258,10 @@ public class kazino extends JFrame {
         button1 = new JButton();
         moneyLabel = new JLabel();
         numbers = new JTextField();
-        comboBox1 = new JComboBox(bet1);
+        comboBox1 = new JComboBox(bet1);//bet1
         label1 = new JLabel();
         label2 = new JLabel();
-        Colors1 = new JComboBox(bet3);
+        Colors1 = new JComboBox(bet3);//bet3
         panel2 = new JPanel();
 
         //======== panel1 ========
