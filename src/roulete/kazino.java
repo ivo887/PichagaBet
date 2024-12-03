@@ -20,7 +20,7 @@ public class kazino extends JFrame {
     private String bet3[]={"Black", "Red", "Green"};
     private RoulettePanel roulettePanel;
     private Timer timer;
-    private int angle = 0;
+    private double angle = 0;
     public int totalMoney;
 
     public kazino(int totalMoney) {
@@ -41,7 +41,7 @@ public class kazino extends JFrame {
 
         updateMoneyDisplay();
 
-        this.button1.addActionListener(new ActionListener() {
+        button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int bet = Integer.parseInt(textField1.getText());
@@ -54,6 +54,19 @@ public class kazino extends JFrame {
                     button1.setEnabled(false);
                     Random rand = new Random();
                     int rand_int1 = rand.nextInt(37);
+                    angle = 0; // Reset angle before starting the timer
+                    timer = new Timer(10, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (angle < rand_int1 * (360 / 37)) {
+                                angle += 1;
+                            } else {
+                                timer.stop(); // Stop the timer once the spin completes
+                            }
+                            roulettePanel.repaint();
+                        }
+                    });
+                    timer.start();
                     new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
@@ -80,7 +93,7 @@ public class kazino extends JFrame {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setBackground(java.awt.Color.darkGray);
             g2d.setColor(java.awt.Color.white);
-            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/32, getHeight()/64, getHeight()/64);
+            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/16, getHeight()/64, getHeight()/64);
 
 
             int diameter = Math.min(getWidth(), getHeight());
@@ -137,17 +150,6 @@ public class kazino extends JFrame {
         }
 
         protected void process(List<Integer> chunks) {
-            angle = 0;
-            timer = new Timer(10, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (angle < rand*360/37) {
-                        angle += 1;
-                    }
-                    roulettePanel.repaint();
-                }
-            });
-            timer.start();
             for (int value : chunks) {
                 button1.setText(Integer.toString(value));
             }
@@ -245,8 +247,18 @@ public class kazino extends JFrame {
     private RoulettePanel roulettePanel;
     private Timer timer;
     private int angle = 0;
-    public int totalMoney;*/
-
+    public int totalMoney;
+    panel1 = new JPanel();
+    textField1 = new JTextField();
+    button1 = new JButton();
+    moneyLabel = new JLabel();
+    numbers = new JTextField();
+    comboBox1 = new JComboBox(bet1);
+    label1 = new JLabel();
+    label2 = new JLabel();
+    Colors1 = new JComboBox(bet3);
+    panel2 = new JPanel();
+*/
 
     // JFormDesigner - Variables declaration - DO NOT MODI
 
@@ -258,10 +270,10 @@ public class kazino extends JFrame {
         button1 = new JButton();
         moneyLabel = new JLabel();
         numbers = new JTextField();
-        comboBox1 = new JComboBox(bet1);//bet1
+        comboBox1 = new JComboBox(bet1);
         label1 = new JLabel();
         label2 = new JLabel();
-        Colors1 = new JComboBox(bet3);//bet3
+        Colors1 = new JComboBox(bet3);
         panel2 = new JPanel();
 
         //======== panel1 ========
