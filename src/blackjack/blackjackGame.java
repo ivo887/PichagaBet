@@ -23,24 +23,43 @@ public class blackjackGame extends JFrame {
     }
 
     private void initComponents() {
-        JPanel panel = new JPanel();
-        JButton dealToPlayerButton = new JButton("Deal to Player");
-     //   JButton dealToDealerButton = new JButton("Deal to Dealer");
-        JButton standButton = new JButton("Stand");
-        JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout());
+
+        // Player Panel
+        JPanel playerPanel = new JPanel();
+        playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
         JLabel playerHandLabel = new JLabel("Player's Hand: ");
+        playerPanel.add(playerHandLabel);
+
+        // Dealer Panel
+        JPanel dealerPanel = new JPanel();
+        dealerPanel.setLayout(new BoxLayout(dealerPanel, BoxLayout.Y_AXIS));
+        JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
+
+        dealerPanel.add(dealerHandLabel);
+
+        // Buttons Panel
+        JPanel buttonPanel = new JPanel();
+        JButton dealToPlayerButton = new JButton("Deal to Player");
+        JButton standButton = new JButton("Stand");
+        buttonPanel.add(dealToPlayerButton);
+        buttonPanel.add(standButton);
+
+        // Total Money Label
         JLabel totalMoneyLabel = new JLabel(totalMoney + " $");
 
-        // Panel layout
-        panel.setLayout(new BorderLayout());
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.add(dealToPlayerButton);
-    //    buttonPanel.add(dealToDealerButton);
-        buttonPanel.add(standButton);
-        panel.add(buttonPanel, BorderLayout.SOUTH);
-        panel.add(dealerHandLabel, BorderLayout.NORTH);
-        panel.add(playerHandLabel, BorderLayout.CENTER);
-        panel.add(totalMoneyLabel, BorderLayout.PAGE_END);
+        // Add components to the main panel
+        mainPanel.add(dealerPanel, BorderLayout.NORTH);
+        mainPanel.add(playerPanel, BorderLayout.CENTER);
+        mainPanel.add(buttonPanel, BorderLayout.SOUTH);
+        mainPanel.add(totalMoneyLabel, BorderLayout.EAST);
+
+        // Set up frame
+        setTitle("Blackjack Game");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500, 400);
+        add(mainPanel);
 
         // Button actions
         dealToPlayerButton.addActionListener(e -> {
@@ -59,13 +78,11 @@ public class blackjackGame extends JFrame {
             updateHandLabel(dealerHandLabel, dealer.getHand(), "Dealer");
             determineWinner();
         });
-
-        // Frame configuration
-        setTitle("Blackjack Game");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
-        add(panel);
     }
+
+
+
+
 
     private void updateHandLabel(JLabel label, List<Card> hand, String owner) {
         StringBuilder text = new StringBuilder(owner + "'s Hand: ");
@@ -231,4 +248,3 @@ public class blackjackGame extends JFrame {
     }
 
 }
-

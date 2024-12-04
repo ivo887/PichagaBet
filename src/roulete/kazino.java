@@ -270,10 +270,10 @@ public class kazino extends JFrame {
         button1 = new JButton();
         moneyLabel = new JLabel();
         numbers = new JTextField();
-        comboBox1 = new JComboBox(bet1);
+        comboBox1 = new JComboBox();
         label1 = new JLabel();
         label2 = new JLabel();
-        Colors1 = new JComboBox(bet3);
+        Colors1 = new JComboBox();
         panel2 = new JPanel();
 
         //======== panel1 ========
