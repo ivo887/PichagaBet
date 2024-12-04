@@ -22,6 +22,7 @@ public class kazino extends JFrame {
     private Timer timer;
     private double angle = 0;
     public int totalMoney;
+    public double diff= 360/74;
 
     public kazino(int totalMoney) {
         this.totalMoney = totalMoney;
@@ -59,15 +60,16 @@ public class kazino extends JFrame {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             if (angle < rand_int1 * (360 / 37)) {
-                                angle += 1;
+                                angle += diff;
                             } else {
                                 timer.stop(); // Stop the timer once the spin completes
+                                new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
                             }
                             roulettePanel.repaint();
                         }
                     });
                     timer.start();
-                    new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
+
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
                 }
@@ -213,12 +215,16 @@ public class kazino extends JFrame {
                         }
                     }
                     else{
-                        if(Colors1.getSelectedItem().equals("Black") && rand % 2 == 0) {
+                        if(Colors1.getSelectedItem().equals("Black") && rand % 2 == 0&&rand!=0) {
                             win = true;
                             totalMoney += bet * 2;
-                        } else if(Colors1.getSelectedItem().equals("Red") && rand % 2 != 0) {
+                        } else if(Colors1.getSelectedItem().equals("Red") && rand % 2 != 0&&rand!=0) {
                             win = true;
                             totalMoney += bet * 2;
+                        }
+                        else if(Colors1.getSelectedItem().equals("Green") && rand == 0){
+                            win = true;
+                            totalMoney += bet * 35;
                         }
                     }
 
@@ -270,10 +276,10 @@ public class kazino extends JFrame {
         button1 = new JButton();
         moneyLabel = new JLabel();
         numbers = new JTextField();
-        comboBox1 = new JComboBox();
+        comboBox1 = new JComboBox(bet1);
         label1 = new JLabel();
         label2 = new JLabel();
-        Colors1 = new JComboBox();
+        Colors1 = new JComboBox(bet3);
         panel2 = new JPanel();
 
         //======== panel1 ========
