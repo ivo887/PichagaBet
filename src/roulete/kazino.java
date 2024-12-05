@@ -39,6 +39,9 @@ public class kazino extends JFrame {
         roulettePanel = new RoulettePanel();
         panel2.add(roulettePanel);
         roulettePanel.setBackground(java.awt.Color.darkGray);
+        for(String bet : bet1) {
+            comboBox1.addItem(bet);
+        }
 
 
         updateMoneyDisplay();
@@ -273,12 +276,16 @@ public class kazino extends JFrame {
                                 }
                                 break;
                             case "Lower or Higher":
-                                if (Colors1.getSelectedItem().equals("Higher") && rand > 18) {
+                                if (Colors1.getSelectedItem().equals("Higher") && rand > Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     totalMoney += bet * 2;
-                                } else if (Colors1.getSelectedItem().equals("Lower") && rand <= 18) {
+                                } else if (Colors1.getSelectedItem().equals("Lower") && rand > Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     totalMoney += bet * 2;
+                                }
+                                else if (rand == Integer.parseInt(numbersArray[0].trim())) {
+                                    win = true;
+                                    totalMoney += bet;
                                 }
                                 break;
                         }
@@ -331,7 +338,7 @@ public class kazino extends JFrame {
         button1 = new JButton();
         moneyLabel = new JLabel();
         numbers = new JTextField();
-        comboBox1 = new JComboBox(bet1);
+        comboBox1 = new JComboBox();
         label1 = new JLabel();
         label2 = new JLabel();
         Colors1 = new JComboBox();
