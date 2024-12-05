@@ -16,8 +16,9 @@ import javax.swing.SwingWorker;
 public class kazino extends JFrame {
    // private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
-    private String bet2[]={"1-18", "19-36"};
+    private String bet2[]={"Odd", "Even"};
     private String bet3[]={"Black", "Red", "Green"};
+    private String bet4[]={"Higher", "Lower"};
     private RoulettePanel roulettePanel;
     private Timer timer;
     private double angle = 0;
@@ -42,6 +43,36 @@ public class kazino extends JFrame {
 
         updateMoneyDisplay();
 
+        comboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String selectedItem = comboBox1.getSelectedItem().toString();
+                Colors1.removeAllItems();
+                switch (selectedItem) {
+                    case "Straight Up (1 number)":
+                    case "Split (2 numbers)":
+                    case "Street (3 numbers)":
+                    case "Corner (4 numbers)":
+                        // No items to add for these cases
+                        break;
+                    case "Color(Black or Red)":
+                        for (String color : bet3) {
+                            Colors1.addItem(color);
+                        }
+                        break;
+                    case "Odd or Even":
+                        for (String option : bet2) {
+                            Colors1.addItem(option);
+                        }
+                        break;
+                    case "Lower or Higher":
+                        for (String option : bet4) {
+                            Colors1.addItem(option);
+                        }
+                        break;
+                }
+            }
+        });
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -59,8 +90,12 @@ public class kazino extends JFrame {
                     timer = new Timer(10, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            if (angle < rand_int1 * (360 / 37)) {
+                            double targetAngle = rand_int1 * (360.0 / 37)+720;
+                            if (angle < targetAngle) {
                                 angle += diff;
+                                if (angle > targetAngle) {
+                                    angle = targetAngle; // Ensure it stops exactly at the target angle
+                                }
                             } else {
                                 timer.stop(); // Stop the timer once the spin completes
                                 new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
@@ -68,6 +103,7 @@ public class kazino extends JFrame {
                             roulettePanel.repaint();
                         }
                     });
+
                     timer.start();
 
                 } catch (NumberFormatException ex) {
@@ -157,6 +193,7 @@ public class kazino extends JFrame {
             }
         }
 
+        @Override
         protected void done() {
             button1.setEnabled(true);
             boolean win = false;
@@ -166,10 +203,9 @@ public class kazino extends JFrame {
 
             for (String number : numbersArray) {
                 try {
-
-                    if(betType!="Color(Black or Red)"){
+                    if (!betType.equals("Color(Black or Red)")&& !betType.equals("Odd or Even") && !betType.equals("Lower or Higher")) {
                         int chosenNumber = Integer.parseInt(number.trim());
-                        if (chosenNumber < 0 || chosenNumber > 36&& !betType.equals("Color(Black or Red)")) {
+                        if (chosenNumber < 0 || chosenNumber > 36) {
                             JOptionPane.showMessageDialog(null, "Please enter valid numbers (0-36).");
                             return;
                         }
@@ -211,27 +247,46 @@ public class kazino extends JFrame {
                                     totalMoney += bet * 8;
                                 }
                                 break;
+                        }
+                    } else {
+                        switch (betType) {
+                            case "Color(Black or Red)":
+                                if (Colors1.getSelectedItem().equals("Black") && rand % 2 == 0 && rand != 0) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                } else if (Colors1.getSelectedItem().equals("Red") && rand % 2 != 0 && rand != 0) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                } else if (Colors1.getSelectedItem().equals("Green") && rand == 0) {
+                                    win = true;
+                                    totalMoney += bet * 35;
+                                }
+                                break;
 
+                            case "Odd or Even":
+                                if (Colors1.getSelectedItem().equals("Even") && rand % 2 == 0) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                } else if (Colors1.getSelectedItem().equals("Odd") && rand % 2 != 0) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                }
+                                break;
+                            case "Lower or Higher":
+                                if (Colors1.getSelectedItem().equals("Higher") && rand > 18) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                } else if (Colors1.getSelectedItem().equals("Lower") && rand <= 18) {
+                                    win = true;
+                                    totalMoney += bet * 2;
+                                }
+                                break;
                         }
                     }
-                    else{
-                        if(Colors1.getSelectedItem().equals("Black") && rand % 2 == 0&&rand!=0) {
-                            win = true;
-                            totalMoney += bet * 2;
-                        } else if(Colors1.getSelectedItem().equals("Red") && rand % 2 != 0&&rand!=0) {
-                            win = true;
-                            totalMoney += bet * 2;
-                        }
-                        else if(Colors1.getSelectedItem().equals("Green") && rand == 0){
-                            win = true;
-                            totalMoney += bet * 35;
-                        }
-                    }
-
-                    // Determine payout based on the bet type
-
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Please enter valid numbers.");
+                    if (!betType.equals("Color(Black or Red)") && !betType.equals("Odd or Even") && !betType.equals("Lower or Higher")) {
+                        JOptionPane.showMessageDialog(null, "Please enter valid numbers (0-36).");
+                    }
                     return;
                 }
             }
@@ -279,7 +334,7 @@ public class kazino extends JFrame {
         comboBox1 = new JComboBox(bet1);
         label1 = new JLabel();
         label2 = new JLabel();
-        Colors1 = new JComboBox(bet3);
+        Colors1 = new JComboBox();
         panel2 = new JPanel();
 
         //======== panel1 ========
