@@ -359,7 +359,7 @@ public class kazino extends JPanel {
             //---- moneyLabel ----
             moneyLabel.setBackground(Color.white);
             moneyLabel.setForeground(Color.white);
-            moneyLabel.setFont(new Font("Inter", Font.ITALIC, 22));
+            moneyLabel.setFont(new Font("Inter", Font.ITALIC, 18));
 
             //---- numbers ----
             numbers.setForeground(Color.white);
@@ -395,12 +395,13 @@ public class kazino extends JPanel {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap(544, Short.MAX_VALUE)
+                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
-                                .addGap(196, 196, 196))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                     .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
@@ -413,12 +414,11 @@ public class kazino extends JPanel {
                                     .addComponent(textField1)
                                     .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(10, 10, 10))
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap(544, Short.MAX_VALUE)
-                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(10, 10, 10))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                                .addContainerGap())))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
