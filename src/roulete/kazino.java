@@ -13,7 +13,7 @@ import javax.swing.SwingWorker;
 
 
 
-public class kazino extends JFrame {
+public class kazino extends JPanel {
    // private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
     private String bet2[]={"Odd", "Even"};
@@ -28,11 +28,6 @@ public class kazino extends JFrame {
     public kazino(int totalMoney) {
         this.totalMoney = totalMoney;
         initComponents();
-        JFrame frame = new JFrame("PichagaBET");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
-        frame.add(this.panel1);
-        frame.setVisible(true);
         comboBox1.setForeground(java.awt.Color.WHITE);
         textField1.setCaretColor(java.awt.Color.white);
         numbers.setCaretColor(java.awt.Color.white);
@@ -81,10 +76,10 @@ public class kazino extends JFrame {
                 try {
                     int bet = Integer.parseInt(textField1.getText());
                     String betNumbers = numbers.getText().trim();
-                    if (bet > kazino.this.totalMoney || bet <= 0) {
+                    /*if (bet > kazino.this.totalMoney || bet <= 0) {
                         JOptionPane.showMessageDialog(frame, "Invalid bet amount!");
                         return;
-                    }
+                    }*/
                     kazino.this.totalMoney -= bet;
                     button1.setEnabled(false);
                     Random rand = new Random();
@@ -110,7 +105,7 @@ public class kazino extends JFrame {
                     timer.start();
 
                 } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
+                    //JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
                 }
             }
         });
@@ -364,6 +359,7 @@ public class kazino extends JFrame {
             //---- moneyLabel ----
             moneyLabel.setBackground(Color.white);
             moneyLabel.setForeground(Color.white);
+            moneyLabel.setFont(new Font("Inter", Font.ITALIC, 22));
 
             //---- numbers ----
             numbers.setForeground(Color.white);
@@ -399,21 +395,19 @@ public class kazino extends JFrame {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 724, Short.MAX_VALUE)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                                .addGap(196, 196, 196))
                             .addGroup(panel1Layout.createSequentialGroup()
                                 .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                    .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                                    .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
                                     .addComponent(numbers, GroupLayout.Alignment.LEADING)
                                     .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(60, 60, 60)
-                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panel1Layout.createParallelGroup()
                                     .addComponent(textField1)
@@ -421,14 +415,18 @@ public class kazino extends JFrame {
                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(10, 10, 10))
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap(544, Short.MAX_VALUE)
+                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
+                        .addContainerGap()
                         .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(103, 103, 103)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
                             .addGroup(panel1Layout.createSequentialGroup()
@@ -453,7 +451,7 @@ public class kazino extends JFrame {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
     // Generated using JFormDesigner Educational license - Ivaylo Yordanov (ivayloay)
-    private JPanel panel1;
+    public JPanel panel1;
     private JTextField textField1;
     private JButton button1;
     private JLabel moneyLabel;

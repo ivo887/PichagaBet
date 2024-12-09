@@ -32,9 +32,11 @@ public class mainMenu extends JFrame {
 
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-
-                new kazino(totalMoney);
+                frame.getContentPane().removeAll();
+                kazino kazinoPanel = new kazino(totalMoney);
+                frame.add(kazinoPanel.panel1); // Add the panel1 from kazino
+                frame.revalidate();
+                frame.repaint();
             }
         });
 
