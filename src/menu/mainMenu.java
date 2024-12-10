@@ -23,9 +23,10 @@ public class mainMenu extends JFrame {
     //private MenuListener listener;
     public mainMenu() {
         initComponents();
-        JFrame frame = new JFrame("Pichaga");
+        JFrame frame = new JFrame("PichagaBet");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(1280, 720);
+        frame.setLocationRelativeTo(null);
         frame.add(this.panel1);
         frame.setVisible(true);
 
@@ -34,7 +35,7 @@ public class mainMenu extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 frame.getContentPane().removeAll();
                 kazino kazinoPanel = new kazino(totalMoney);
-                frame.add(kazinoPanel.panel1); // Add the panel1 from kazino
+                frame.add(kazinoPanel.panel1);
                 frame.revalidate();
                 frame.repaint();
             }
