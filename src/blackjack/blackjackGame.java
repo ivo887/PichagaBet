@@ -7,14 +7,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class blackjackGame extends JFrame {
+
+public class blackjackGame extends JPanel {
     private Deck deck;
     private Dealer dealer;
     private Player player;
     public int totalMoney;
+    private int currentBet; // Field for current bet
+    public JPanel mainPanel;
 
     public blackjackGame(int totalMoney) {
         this.totalMoney = totalMoney;
+        this.currentBet = 0;
 
         deck = new Deck();
         dealer = new Dealer(deck);
@@ -22,49 +26,61 @@ public class blackjackGame extends JFrame {
         initComponents();
     }
 
+
+    private ImageIcon getCardImage(Card card) {
+        String imagePath = "src/cards/" + card.getRank().name().toLowerCase() + "_of_" + card.getSuit().name().toLowerCase() + ".png";
+        ImageIcon icon = new ImageIcon(imagePath);
+        Image img = icon.getImage().getScaledInstance(80, 120, Image.SCALE_SMOOTH);
+        System.out.println(imagePath);
+        return new ImageIcon(img);
+    }
+
     private void initComponents() {
-        JPanel mainPanel = new JPanel();
+        mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Player Panel
-        JPanel playerPanel = new JPanel();
+        JPanel playerPanel = new JPanel(new FlowLayout());
+
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
         JLabel playerHandLabel = new JLabel("Player's Hand: ");
         playerPanel.add(playerHandLabel);
 
-        // Dealer Panel
-        JPanel dealerPanel = new JPanel();
+
+        JPanel dealerPanel = new JPanel(new FlowLayout());
         dealerPanel.setLayout(new BoxLayout(dealerPanel, BoxLayout.Y_AXIS));
         JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
 
         dealerPanel.add(dealerHandLabel);
 
-        // Buttons Panel
         JPanel buttonPanel = new JPanel();
         JButton dealToPlayerButton = new JButton("Deal to Player");
         JButton standButton = new JButton("Stand");
         buttonPanel.add(dealToPlayerButton);
         buttonPanel.add(standButton);
 
-        // Total Money Label
         JLabel totalMoneyLabel = new JLabel(totalMoney + " $");
 
-        // Add components to the main panel
         mainPanel.add(dealerPanel, BorderLayout.NORTH);
         mainPanel.add(playerPanel, BorderLayout.CENTER);
         mainPanel.add(buttonPanel, BorderLayout.SOUTH);
         mainPanel.add(totalMoneyLabel, BorderLayout.EAST);
 
-        // Set up frame
-        setTitle("Blackjack Game");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JLabel betLabel = new JLabel("Place your bet: ");
+        JTextField betField = new JTextField(5);
+        JButton placeBetButton = new JButton("Place Bet");
+        JPanel bettingPanel = new JPanel();
+        bettingPanel.add(betLabel);
+        bettingPanel.add(betField);
+        bettingPanel.add(placeBetButton);
+        bettingPanel.add(totalMoneyLabel);
+
+
         setSize(500, 400);
         add(mainPanel);
 
-        // Button actions
-        dealToPlayerButton.addActionListener(e -> {
+            dealToPlayerButton.addActionListener(e -> {
             player.drawCard();
-            updateHandLabel(playerHandLabel, player.getHand(), "Player");
+            updateHandPanel(playerPanel, player.getHand(), "Player");
             if (player.getHandValue() > 21) {
                 JOptionPane.showMessageDialog(this, "Dealer wins.");
                 resetGame();
@@ -75,24 +91,66 @@ public class blackjackGame extends JFrame {
             while (dealer.getHandValue() < 17) {
                 dealer.drawCard();
             }
-            updateHandLabel(dealerHandLabel, dealer.getHand(), "Dealer");
+            updateHandPanel(dealerPanel, dealer.getHand(), "Dealer");
             determineWinner();
         });
+
+//        standButton.addActionListener(e -> {
+//            if (currentBet == 0) {
+//                JOptionPane.showMessageDialog(this, "You must place a bet before starting the game!");
+//                return;
+//            }
+//            while (dealer.getHandValue() < 17) {
+//                dealer.drawCard();
+//            }
+//            updateHandPanel(dealerPanel, dealer.getHand(), "Dealer");
+//            determineWinner(totalMoneyLabel);
+//        });
+
+        placeBetButton.addActionListener(e -> {
+            try {
+                int bet = Integer.parseInt(betField.getText());
+                if (bet > totalMoney) {
+                    JOptionPane.showMessageDialog(this, "You don't have enough money to place this bet!");
+                } else if (bet <= 0) {
+                    JOptionPane.showMessageDialog(this, "Bet must be greater than zero!");
+                } else {
+                    currentBet = bet;
+                    JOptionPane.showMessageDialog(this, "Bet placed: $" + currentBet);
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Invalid bet amount!");
+            }
+        });
+
+
+
+
+
     }
 
 
 
+    private void updateHandPanel(JPanel panel, List<Card> hand, String owner) {
+        panel.removeAll();
 
+        JLabel ownerLabel = new JLabel(owner + "'s Hand:");
+        panel.add(ownerLabel);
 
-    private void updateHandLabel(JLabel label, List<Card> hand, String owner) {
-        StringBuilder text = new StringBuilder(owner + "'s Hand: ");
         for (Card card : hand) {
-            text.append(card).append(" ");
+            JLabel cardLabel = new JLabel(getCardImage(card));
+            panel.add(cardLabel);
         }
+
         int totalValue = owner.equals("Dealer") ? dealer.getHandValue() : player.getHandValue();
-        text.append("(Total: ").append(totalValue).append(")");
-        label.setText(text.toString());
+        JLabel totalLabel = new JLabel("Total: " + totalValue);
+        panel.add(totalLabel);
+
+        panel.revalidate();
+        panel.repaint();
     }
+
+
 
     private void determineWinner() {
         int playerValue = player.getHandValue();
@@ -112,6 +170,9 @@ public class blackjackGame extends JFrame {
         deck.reset();
         dealer.resetHand();
         player.resetHand();
+
+        updateHandPanel((JPanel) mainPanel.getComponent(0), dealer.getHand(), "Dealer");
+        updateHandPanel((JPanel) mainPanel.getComponent(1), player.getHand(), "Player");
     }
 
 
@@ -221,6 +282,10 @@ public class blackjackGame extends JFrame {
             return rank;
         }
 
+        public Suit getSuit() {
+            return suit;
+        }
+
         @Override
         public String toString() {
             return rank + " of " + suit;
@@ -246,5 +311,4 @@ public class blackjackGame extends JFrame {
             return value;
         }
     }
-
 }

@@ -8,13 +8,13 @@ import java.util.Random;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.border.*;
 
 
 
 
 
 public class kazino extends JPanel {
-   // private int totalMoney = 100; // Starting money// Combo box for betting options
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
     private String bet2[]={"Odd", "Even"};
     private String bet3[]={"Black", "Red", "Green"};
