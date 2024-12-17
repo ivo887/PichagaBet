@@ -29,8 +29,8 @@ new FormModel {
 				name: "panel4"
 				"background": new java.awt.Color( 0, 0, 0, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {comp button1::l::450:x, comp button2::t::450:x}"
-					"$verticalGroup": "par l {seq {space :p:78:p, comp button2::::70:x, space :::p, comp button1::::71:x, space :p:87:p}}"
+					"$horizontalGroup": "par l {comp button1::l::450:x, comp button2::t::450:x};par l {seq {space :0:0:x, comp button4:::p:450:p, space :0:0:x}}"
+					"$verticalGroup": "par l {seq {space :p:78:p, comp button2::::70:x, space :::p, comp button1::::71:x, space :p:87:p}};par l {seq {space :0:0:x, comp button4:::p:71:p, space :0:0:x}}"
 				} ) {
 					name: "panel3"
 					"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -43,8 +43,14 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "button1"
 						"text": "Roulete"
-						"foreground": new java.awt.Color( 255, 255, 255, 255 )
-						"background": new java.awt.Color( 51, 51, 51, 255 )
+						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+						"background": &Color1 new java.awt.Color( 51, 51, 51, 255 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button4"
+						"text": "Aviator"
+						"foreground": #Color0
+						"background": #Color1
 					} )
 				} )
 			} )

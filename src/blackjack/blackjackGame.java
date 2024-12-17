@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class blackjackGame extends JPanel {
+public class    blackjackGame extends JPanel {
     private Deck deck;
     private Dealer dealer;
     private Player player;
