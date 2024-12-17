@@ -35,17 +35,15 @@ public class mainMenu extends JFrame {
 
 
 
-
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                frame.remove(panel1); // Clear all components from panel4
+                frame.remove(panel1);
                 kazino kazinoPanel = new kazino(totalMoney);
-                frame.add(kazinoPanel.panel1); // Add the new panel
+                frame.add(kazinoPanel.panel1);
                 kazinoPanel.panel1.add(button3);
                 button3.setSize(frame.getWidth()/18, frame.getHeight()/18);
-                frame.revalidate(); // Revalidate the panel to apply changes
-                frame.repaint(); // Repaint the panel to reflect changes
+                frame.revalidate();
+                frame.repaint();
             }
         });
 
@@ -59,6 +57,7 @@ public class mainMenu extends JFrame {
                 frame.repaint();
             }
         });
+
 
         this.button3.addActionListener(new ActionListener() {
             @Override
