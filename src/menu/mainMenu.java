@@ -6,6 +6,7 @@ package menu;
 
 import java.awt.*;
 
+import aviator.aviatorGame;
 import org.w3c.dom.css.CSSStyleSheet;
 import roulete.kazino;
 import blackjack.blackjackGame;
@@ -32,7 +33,6 @@ public class mainMenu extends JFrame {
         frame.add(this.panel1);
         frame.setVisible(true);
         panel2.remove(button3);
-
 
 
         this.button1.addActionListener(new ActionListener() {
@@ -74,7 +74,7 @@ public class mainMenu extends JFrame {
         this.button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1); // Clear the current panel
-                AviatorGame aviatorPanel = new AviatorGame(totalMoney);
+                aviatorGame aviatorPanel = new aviatorGame(totalMoney);
                 frame.add(aviatorPanel); // Add the Aviator panel
                 frame.revalidate(); // Revalidate the panel to apply changes
                 frame.repaint(); // Repaint the panel to reflect changes
@@ -139,42 +139,38 @@ public class mainMenu extends JFrame {
                     button2.setText("Blackjack");
                     button2.setBackground(new Color(0x333333));
                     button2.setForeground(Color.white);
+                    button2.setPreferredSize(new Dimension(80, 34));
 
                     //---- button1 ----
                     button1.setText("Roulete");
                     button1.setForeground(Color.white);
                     button1.setBackground(new Color(0x333333));
+                    button1.setPreferredSize(new Dimension(80, 34));
 
                     //---- button4 ----
                     button4.setText("Aviator");
                     button4.setForeground(Color.white);
                     button4.setBackground(new Color(0x333333));
+                    button4.setPreferredSize(new Dimension(80, 34));
 
                     GroupLayout panel3Layout = new GroupLayout(panel3);
                     panel3.setLayout(panel3Layout);
                     panel3Layout.setHorizontalGroup(
                         panel3Layout.createParallelGroup()
-                            .addGroup(panel3Layout.createParallelGroup()
-                                .addGroup(panel3Layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(button4, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE)))
-                            .addComponent(button1, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-                            .addComponent(button2, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(button2, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(button1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     );
                     panel3Layout.setVerticalGroup(
                         panel3Layout.createParallelGroup()
-                            .addGroup(panel3Layout.createParallelGroup()
-                                .addGroup(panel3Layout.createSequentialGroup()
-                                    .addGap(0, 0, Short.MAX_VALUE)
-                                    .addComponent(button4, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE)))
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(78, 78, 78)
-                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
-                                .addGap(87, 87, 87))
+                                .addGap(52, 52, 52)
+                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(button4, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                .addGap(58, 58, 58))
                     );
                 }
 
@@ -197,7 +193,7 @@ public class mainMenu extends JFrame {
                     .addComponent(panel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 360, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
