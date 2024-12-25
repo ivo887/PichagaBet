@@ -29,8 +29,8 @@ new FormModel {
 				name: "panel4"
 				"background": new java.awt.Color( 0, 0, 0, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {comp button2:::p:450:p, comp button4:::::x, comp button1::t:::x}"
-					"$verticalGroup": "par l {seq {space :p:52:p, comp button2::::56:x, space s:::p, comp button4:::p:54:p, space s:::p, comp button1::::56:x, space :p:58:p}}"
+					"$horizontalGroup": "par l {comp button2::::450:x, comp button4:::::x, comp button1::t:::x}"
+					"$verticalGroup": "par l {seq {space :p:52:p, comp button2::::56:x, space s:::p, comp button4::::54:x, space s:::p, comp button1::::56:x, space :p:58:p}}"
 				} ) {
 					name: "panel3"
 					"background": new java.awt.Color( 0, 0, 0, 255 )

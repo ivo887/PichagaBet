@@ -6,6 +6,7 @@ package menu;
 
 import java.awt.*;
 
+import aviator.Aviator;
 import aviator.aviatorGame;
 import org.w3c.dom.css.CSSStyleSheet;
 import roulete.kazino;
@@ -74,8 +75,9 @@ public class mainMenu extends JFrame {
         this.button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1); // Clear the current panel
-                aviatorGame aviatorPanel = new aviatorGame(totalMoney);
+                Aviator aviatorPanel = new Aviator(totalMoney); // Create a new Aviator panel
                 frame.add(aviatorPanel); // Add the Aviator panel
+                aviatorPanel.add(button3); // Add the home button to the Aviator panel
                 frame.revalidate(); // Revalidate the panel to apply changes
                 frame.repaint(); // Repaint the panel to reflect changes
             }
@@ -83,6 +85,9 @@ public class mainMenu extends JFrame {
 
     }
 
+    public int getTotalMoney() {
+        return totalMoney;
+    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -157,7 +162,7 @@ public class mainMenu extends JFrame {
                     panel3.setLayout(panel3Layout);
                     panel3Layout.setHorizontalGroup(
                         panel3Layout.createParallelGroup()
-                            .addComponent(button2, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(button2, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                             .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     );
@@ -167,7 +172,7 @@ public class mainMenu extends JFrame {
                                 .addGap(52, 52, 52)
                                 .addComponent(button2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button4, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(button1, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                                 .addGap(58, 58, 58))

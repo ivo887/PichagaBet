@@ -149,6 +149,7 @@ public class aviatorGame extends JPanel {
         isRunning = false;
         startButton.setEnabled(true);
         cashOutButton.setEnabled(false);
+
         updateMultiplierDisplay();
     }
 
