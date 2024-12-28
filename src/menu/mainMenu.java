@@ -4,27 +4,17 @@
 
 package menu;
 
-import java.awt.*;
-
+import Money.MoneyManager;
 import aviator.Aviator;
-import aviator.aviatorGame;
-import org.w3c.dom.css.CSSStyleSheet;
-import roulete.kazino;
 import blackjack.blackjackGame;
+import roulete.kazino;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
-//import net.miginfocom.swing.*;
 
-/**
- * @author martbul
- */
 public class mainMenu extends JFrame {
-    public int totalMoney = 100; // Starting money// Combo box for betting options
-
-    //private MenuListener listener;
     public mainMenu() {
         initComponents();
         JFrame frame = new JFrame("PichagaBet");
@@ -34,15 +24,15 @@ public class mainMenu extends JFrame {
         frame.add(this.panel1);
         frame.setVisible(true);
         panel2.remove(button3);
-
+        label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
 
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1);
-                kazino kazinoPanel = new kazino(totalMoney);
+                kazino kazinoPanel = new kazino();
                 frame.add(kazinoPanel.panel1);
                 kazinoPanel.panel1.add(button3);
-                button3.setSize(frame.getWidth()/18, frame.getHeight()/18);
+                button3.setSize(frame.getWidth() / 18, frame.getHeight() / 18);
                 frame.revalidate();
                 frame.repaint();
             }
@@ -51,14 +41,13 @@ public class mainMenu extends JFrame {
         this.button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.remove(panel1);
-                blackjackGame blackJackPanel = new blackjackGame(totalMoney);
+                blackjackGame blackJackPanel = new blackjackGame();
                 frame.add(blackJackPanel.mainPanel);
                 blackJackPanel.mainPanel.add(button3, BorderLayout.NORTH);
                 frame.revalidate();
                 frame.repaint();
             }
         });
-
 
         this.button3.addActionListener(new ActionListener() {
             @Override
@@ -71,23 +60,18 @@ public class mainMenu extends JFrame {
             }
         });
 
-        // In your mainMenu.java class
         this.button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.remove(panel1); // Clear the current panel
-                Aviator aviatorPanel = new Aviator(totalMoney); // Create a new Aviator panel
-                frame.add(aviatorPanel); // Add the Aviator panel
-                aviatorPanel.add(button3); // Add the home button to the Aviator panel
-                frame.revalidate(); // Revalidate the panel to apply changes
-                frame.repaint(); // Repaint the panel to reflect changes
+                frame.remove(panel1);
+                Aviator aviatorPanel = new Aviator();
+                frame.add(aviatorPanel);
+                aviatorPanel.add(button3);
+                frame.revalidate();
+                frame.repaint();
             }
         });
-
     }
 
-    public int getTotalMoney() {
-        return totalMoney;
-    }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -100,6 +84,7 @@ public class mainMenu extends JFrame {
         button2 = new JButton();
         button1 = new JButton();
         button4 = new JButton();
+        label1 = new JLabel();
 
         //======== panel1 ========
         {
@@ -158,6 +143,11 @@ public class mainMenu extends JFrame {
                     button4.setBackground(new Color(0x333333));
                     button4.setPreferredSize(new Dimension(80, 34));
 
+                    //---- label1 ----
+                    label1.setText("text");
+                    label1.setForeground(Color.white);
+                    label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() & ~Font.BOLD, label1.getFont().getSize() + 15f));
+
                     GroupLayout panel3Layout = new GroupLayout(panel3);
                     panel3.setLayout(panel3Layout);
                     panel3Layout.setHorizontalGroup(
@@ -165,11 +155,17 @@ public class mainMenu extends JFrame {
                             .addComponent(button2, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                             .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
+                                .addContainerGap(325, Short.MAX_VALUE)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
                     );
                     panel3Layout.setVerticalGroup(
                         panel3Layout.createParallelGroup()
                             .addGroup(panel3Layout.createSequentialGroup()
-                                .addGap(52, 52, 52)
+                                .addContainerGap()
+                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
                                 .addComponent(button2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
                                 .addComponent(button4, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
@@ -198,7 +194,7 @@ public class mainMenu extends JFrame {
                     .addComponent(panel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -224,6 +220,7 @@ public class mainMenu extends JFrame {
     private JButton button2;
     private JButton button1;
     private JButton button4;
+    private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
 

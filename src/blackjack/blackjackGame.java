@@ -6,17 +6,18 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-
-public class    blackjackGame extends JPanel {
+import Money.MoneyManager;
+public class blackjackGame extends JPanel {
     private Deck deck;
     private Dealer dealer;
     private Player player;
-    public int totalMoney;
+    private MoneyManager moneyManager;
     private int currentBet; // Field for current bet
     public JPanel mainPanel;
 
-    public blackjackGame(int totalMoney) {
-        this.totalMoney = totalMoney;
+
+    public blackjackGame() {
+        moneyManager = MoneyManager.getInstance();
         this.currentBet = 0;
 
         deck = new Deck();
@@ -52,7 +53,7 @@ public class    blackjackGame extends JPanel {
         buttonPanel.add(dealToPlayerButton);
         buttonPanel.add(standButton);
 
-        JLabel totalMoneyLabel = new JLabel("Money: $" + totalMoney);
+        JLabel totalMoneyLabel = new JLabel("Money: $" + moneyManager.getTotalMoney());
 
         // Betting Panel
         JLabel betLabel = new JLabel("Place your bet: ");
@@ -104,7 +105,7 @@ public class    blackjackGame extends JPanel {
         placeBetButton.addActionListener(e -> {
             try {
                 int bet = Integer.parseInt(betField.getText());
-                if (bet > totalMoney) {
+                if (bet > moneyManager.getTotalMoney()) {
                     JOptionPane.showMessageDialog(this, "You don't have enough money to place this bet!");
                 } else if (bet <= 0) {
                     JOptionPane.showMessageDialog(this, "Bet must be greater than zero!");
@@ -155,13 +156,13 @@ public class    blackjackGame extends JPanel {
 
     private void updateMoney(boolean playerWins, JLabel totalMoneyLabel) {
         if (playerWins) {
-            totalMoney += currentBet;
+            moneyManager.setTotalMoney(moneyManager.getTotalMoney() + currentBet);
         } else {
-            totalMoney -= currentBet;
+            moneyManager.setTotalMoney(moneyManager.getTotalMoney() - currentBet);
         }
         currentBet = 0;
-        totalMoneyLabel.setText("Money: $" + totalMoney);
-        if (totalMoney <= 0) {
+        totalMoneyLabel.setText("Money: $" + moneyManager.getTotalMoney());
+        if (moneyManager.getTotalMoney() <= 0) {
             JOptionPane.showMessageDialog(this, "Game over! You are out of money.");
             System.exit(0);
         }
