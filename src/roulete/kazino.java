@@ -11,7 +11,6 @@ import javax.swing.SwingWorker;
 import javax.swing.border.*;
 
 import Money.MoneyManager;
-import menu.mainMenu;
 
 public class kazino extends JPanel {
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};

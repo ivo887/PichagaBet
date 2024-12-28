@@ -28,6 +28,7 @@ public class mainMenu extends JFrame {
 
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
                 frame.remove(panel1);
                 kazino kazinoPanel = new kazino();
                 frame.add(kazinoPanel.panel1);
@@ -40,6 +41,7 @@ public class mainMenu extends JFrame {
 
         this.button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
                 frame.remove(panel1);
                 blackjackGame blackJackPanel = new blackjackGame();
                 frame.add(blackJackPanel.mainPanel);
@@ -52,6 +54,7 @@ public class mainMenu extends JFrame {
         this.button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
                 panel2.remove(button3);
                 frame.getContentPane().removeAll();
                 frame.add(panel1);
@@ -62,6 +65,7 @@ public class mainMenu extends JFrame {
 
         this.button4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
                 frame.remove(panel1);
                 Aviator aviatorPanel = new Aviator();
                 frame.add(aviatorPanel);
@@ -146,7 +150,7 @@ public class mainMenu extends JFrame {
                     //---- label1 ----
                     label1.setText("text");
                     label1.setForeground(Color.white);
-                    label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() & ~Font.BOLD, label1.getFont().getSize() + 15f));
+                    label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() & ~Font.BOLD, label1.getFont().getSize() + 14f));
 
                     GroupLayout panel3Layout = new GroupLayout(panel3);
                     panel3.setLayout(panel3Layout);

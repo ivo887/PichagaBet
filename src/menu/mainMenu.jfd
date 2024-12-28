@@ -59,7 +59,7 @@ new FormModel {
 						name: "label1"
 						"text": "text"
 						"foreground": new java.awt.Color( 255, 255, 255, 255 )
-						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 15, false )
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 14, false )
 					} )
 				} )
 			} )
