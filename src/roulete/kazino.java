@@ -72,6 +72,10 @@ public class kazino extends JPanel {
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+                    if(moneyManager.getTotalMoney() < Integer.parseInt(textField1.getText())) {
+                        JOptionPane.showMessageDialog(null, "You don't have enough money to place this bet.");
+                        return;
+                    }
                     int bet = Integer.parseInt(textField1.getText());
                     String betNumbers = numbers.getText().trim();
                     moneyManager.setTotalMoney(moneyManager.getTotalMoney()-bet);
