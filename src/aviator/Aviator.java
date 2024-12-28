@@ -16,7 +16,7 @@ public class Aviator extends JPanel {
     private DecimalFormat df_obj = new DecimalFormat("#.##");
     private boolean gameRunning = false;
     private double currentMultiplier = 1.0;
-    private int betAmount = 0;
+    private double betAmount = 0.0;
 
     public Aviator() {
         moneyManager = MoneyManager.getInstance();
@@ -44,7 +44,7 @@ public class Aviator extends JPanel {
             return;
         }
         try {
-            betAmount = Integer.parseInt(Amount.getText());
+            betAmount = Double.parseDouble(Amount.getText());
             if (betAmount > moneyManager.getTotalMoney()) {
                 JOptionPane.showMessageDialog(this, "Insufficient funds!");
                 return;
@@ -86,10 +86,10 @@ public class Aviator extends JPanel {
         }
         timer.stop();
         gameRunning = false;
-        int winnings = (int) (betAmount * currentMultiplier);
+        double winnings = betAmount * currentMultiplier;
         moneyManager.setTotalMoney(moneyManager.getTotalMoney() + winnings);
         Money.setText("Money: $" + moneyManager.getTotalMoney());
-        JOptionPane.showMessageDialog(this, "You cashed out at " + df_obj.format(currentMultiplier) + "x and won $" + winnings + "!");
+        JOptionPane.showMessageDialog(this, "You cashed out at " + df_obj.format(currentMultiplier) + "x and won $" + df_obj.format(winnings) + "!");
     }
 
     private void initComponents() {
@@ -115,12 +115,12 @@ public class Aviator extends JPanel {
             GroupLayout AnimationLayout = new GroupLayout(Animation);
             Animation.setLayout(AnimationLayout);
             AnimationLayout.setHorizontalGroup(
-                    AnimationLayout.createParallelGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
+                AnimationLayout.createParallelGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
             );
             AnimationLayout.setVerticalGroup(
-                    AnimationLayout.createParallelGroup()
-                            .addGap(0, 348, Short.MAX_VALUE)
+                AnimationLayout.createParallelGroup()
+                    .addGap(0, 348, Short.MAX_VALUE)
             );
         }
 
@@ -140,48 +140,50 @@ public class Aviator extends JPanel {
         Money.setText("text");
         Money.setBackground(Color.black);
         Money.setForeground(Color.white);
+        Money.setFont(new Font("Inter", Font.PLAIN, 14));
 
         //---- Multyplier ----
         Multyplier.setForeground(Color.white);
         Multyplier.setBackground(Color.black);
+        Multyplier.setFont(new Font("Inter", Font.PLAIN, 14));
 
         GroupLayout layout = new GroupLayout(this);
         setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup()
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup()
+                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGap(456, 456, 456)
+                            .addComponent(Multyplier, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(Money, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                        .addComponent(Animation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup()
-                                        .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGap(503, 503, 503)
-                                                .addComponent(Multyplier, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(Money, GroupLayout.PREFERRED_SIZE, 92, GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(Animation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(Amount, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(Bet, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(Out, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
-                                                .addGap(1, 1, 1)))
-                                .addContainerGap())
+                            .addComponent(Amount, GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(Bet, GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(Out, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                            .addGap(1, 1, 1)))
+                    .addContainerGap())
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup()
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                        .addComponent(Money, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(Multyplier, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Animation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(Out, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                                        .addComponent(Bet, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                                        .addComponent(Amount, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
-                                .addContainerGap(10, Short.MAX_VALUE))
+            layout.createParallelGroup()
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup()
+                        .addComponent(Multyplier, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Money, GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE))
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(Animation, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Out, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                        .addComponent(Bet, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                        .addComponent(Amount, GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE))
+                    .addContainerGap(10, Short.MAX_VALUE))
         );
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
     }

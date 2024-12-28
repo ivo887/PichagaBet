@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class MoneyManager {
     private static MoneyManager instance;
-    private int totalMoney;
+    private double totalMoney;
 
     private MoneyManager() {
         loadMoney();
@@ -22,17 +22,17 @@ public class MoneyManager {
 
     private void loadMoney() {
         try (BufferedReader reader = new BufferedReader(new FileReader("src/Money/money.txt"))) {
-            totalMoney = Integer.parseInt(reader.readLine());
+            totalMoney = Double.parseDouble(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public synchronized int getTotalMoney() {
+    public synchronized double getTotalMoney() {
         return totalMoney;
     }
 
-    public synchronized void setTotalMoney(int totalMoney) {
+    public synchronized void setTotalMoney(double totalMoney) {
         this.totalMoney = totalMoney;
         saveMoney();
     }

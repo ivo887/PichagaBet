@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {seq t {space :p:503:p, comp Multyplier::::90:x, space s:::p, comp Money:::p:92:p}, comp Animation:::::x, seq {comp Amount::::250:x, space s:::p, comp Bet::::162:x, space s:::p, comp Out::::254:x, space :p:1:p}}, space :::p}}"
-			"$verticalGroup": "par l {seq {space :::x, par b {comp Money::b:p:43:p, comp Multyplier::b:::x}, space u:::p, comp Animation:::::x, space u:::p, par l:::p {comp Out::::79:x, comp Bet::l::79:x, comp Amount::l::79:x}, space ::10:x}}"
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq t {space :p:456:p, comp Multyplier::::90:x, space s:::p, comp Money::::139:x}, comp Animation:::::x, seq {comp Amount::::250:x, space s:::p, comp Bet::::162:x, space s:::p, comp Out::::254:x, space :p:1:p}}, space :::p}}"
+			"$verticalGroup": "par l {seq {space :::x, par l {comp Multyplier:::::x, comp Money::::43:x}, space u:::p, comp Animation:::::x, space u:::p, par l:::p {comp Out::::79:x, comp Bet::l::79:x, comp Amount::l::79:x}, space ::10:x}}"
 		} ) {
 			name: "this"
 			"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -39,11 +39,13 @@ new FormModel {
 				"text": "text"
 				"background": new java.awt.Color( 0, 0, 0, 255 )
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				"font": new java.awt.Font( "Inter", 0, 14 )
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "Multyplier"
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"background": new java.awt.Color( 0, 0, 0, 255 )
+				"font": new java.awt.Font( "Inter", 0, 14 )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
