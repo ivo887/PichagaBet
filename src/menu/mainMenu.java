@@ -1,6 +1,3 @@
-/*
- * Created by JFormDesigner on Fri Nov 08 10:39:17 EET 2024
- */
 
 package menu;
 
@@ -227,5 +224,3 @@ public class mainMenu extends JFrame {
     private JLabel label1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
-
-

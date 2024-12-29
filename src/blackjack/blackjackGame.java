@@ -12,7 +12,7 @@ public class blackjackGame extends JPanel {
     private Dealer dealer;
     private Player player;
     private MoneyManager moneyManager;
-    private int currentBet; // Field for current bet
+    private int currentBet;
     public JPanel mainPanel;
 
 
@@ -55,7 +55,7 @@ public class blackjackGame extends JPanel {
 
         JLabel totalMoneyLabel = new JLabel("Money: $" + moneyManager.getTotalMoney());
 
-        // Betting Panel
+
         JLabel betLabel = new JLabel("Place your bet: ");
         JTextField betField = new JTextField(5);
         JButton placeBetButton = new JButton("Place Bet");
@@ -73,7 +73,7 @@ public class blackjackGame extends JPanel {
         setSize(600, 400);
         add(mainPanel);
 
-        // Deal button listener
+
         dealToPlayerButton.addActionListener(e -> {
             if (currentBet == 0) {
                 JOptionPane.showMessageDialog(this, "You must place a bet before dealing!");
@@ -88,7 +88,7 @@ public class blackjackGame extends JPanel {
             }
         });
 
-        // Stand button listener
+
         standButton.addActionListener(e -> {
             if (currentBet == 0) {
                 JOptionPane.showMessageDialog(this, "You must place a bet before starting the game!");
@@ -101,7 +101,7 @@ public class blackjackGame extends JPanel {
             determineWinner(totalMoneyLabel);
         });
 
-        // Place Bet button listener
+
         placeBetButton.addActionListener(e -> {
             try {
                 int bet = Integer.parseInt(betField.getText());
@@ -178,7 +178,7 @@ public class blackjackGame extends JPanel {
         updateHandPanel((JPanel) mainPanel.getComponent(1), player.getHand(), "Player");
     }
 
-    // Supporting Classes
+
 
     static class Deck {
         private List<Card> cards;

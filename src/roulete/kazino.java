@@ -48,7 +48,7 @@ public class kazino extends JPanel {
                     case "Split (2 numbers)":
                     case "Street (3 numbers)":
                     case "Corner (4 numbers)":
-                        // No items to add for these cases
+
                         break;
                     case "Color(Black or Red)":
                         for (String color : bet3) {
@@ -81,7 +81,7 @@ public class kazino extends JPanel {
                     button1.setEnabled(false);
                     Random rand = new Random();
                     int rand_int1 = rand.nextInt(37);
-                    angle = 0; // Reset angle before starting the timer
+                    angle = 0;
                     timer = new Timer(10, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -89,10 +89,10 @@ public class kazino extends JPanel {
                             if (angle < targetAngle) {
                                 angle += diff;
                                 if (angle > targetAngle) {
-                                    angle = targetAngle; // Ensure it stops exactly at the target angle
+                                    angle = targetAngle;
                                 }
                             } else {
-                                timer.stop(); // Stop the timer once the spin completes
+                                timer.stop();
                                 new ProgressTask(rand_int1, bet, (String) comboBox1.getSelectedItem(), betNumbers).execute();
                             }
                             roulettePanel.repaint();
@@ -102,13 +102,12 @@ public class kazino extends JPanel {
                     timer.start();
 
                 } catch (NumberFormatException ex) {
-                    //JOptionPane.showMessageDialog(frame, "Please enter a valid number.");
                 }
             }
         });
     }
     private class RoulettePanel extends JPanel {
-        private final int NUM_SEGMENTS = 37; // 36 numbers + 0
+        private final int NUM_SEGMENTS = 37;
         private final Color[] COLORS = {
                 java.awt.Color.green, java.awt.Color.red,
                 java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
@@ -191,7 +190,7 @@ public class kazino extends JPanel {
             button1.setEnabled(true);
             boolean win = false;
 
-            // Split the input betNumbers to get the array of numbers
+
             String[] numbersArray = betNumbers.split(",");
             int payoutMultiplier = 0;
             for (String number : numbersArray) {
@@ -298,13 +297,13 @@ public class kazino extends JPanel {
                 }
             }
 
-            // Show result message
+
             if (win) {
                 JOptionPane.showMessageDialog(null, "You win!");
             } else {
                 JOptionPane.showMessageDialog(null, "You lose your bet of $" + bet);
             }
-            updateMoneyDisplay(); // Update money display
+            updateMoneyDisplay();
         }
     }
 
@@ -377,56 +376,56 @@ public class kazino extends JPanel {
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
-                    panel1Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addContainerGap(544, Short.MAX_VALUE)
-                                    .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
-                                    .addContainerGap())
+                panel1Layout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap(544, Short.MAX_VALUE)
+                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 190, GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup()
                             .addGroup(panel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(panel1Layout.createParallelGroup()
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
-                                                            .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                                                            .addComponent(numbers, GroupLayout.Alignment.LEADING)
-                                                            .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addGap(60, 60, 60)
-                                                    .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(panel1Layout.createParallelGroup()
-                                                            .addComponent(textField1)
-                                                            .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addGap(10, 10, 10))
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
-                                                    .addContainerGap())))
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                    .addComponent(Colors1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                                    .addComponent(numbers, GroupLayout.Alignment.LEADING)
+                                    .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(60, 60, 60)
+                                .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel1Layout.createParallelGroup()
+                                    .addComponent(textField1)
+                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(10, 10, 10))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
+                                .addContainerGap())))
             );
             panel1Layout.setVerticalGroup(
-                    panel1Layout.createParallelGroup()
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(103, 103, 103)
-                                    .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                    .addComponent(label1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(numbers, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                                            .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
-                                            .addGroup(panel1Layout.createSequentialGroup()
-                                                    .addComponent(label2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                    .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                                            .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
-                                                            .addComponent(button1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(Colors1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(26, 26, 26))
+                panel1Layout.createParallelGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(moneyLabel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)
+                        .addComponent(panel2, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 56, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(numbers, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(comboBox1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(label2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(textField1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                                    .addComponent(button1, GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE))))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Colors1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))
             );
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on

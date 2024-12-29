@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {seq t {space :p:456:p, comp Multyplier::::90:x, space s:::p, comp Money::::139:x}, comp Animation:::::x, seq {comp Amount::::250:x, space s:::p, comp Bet::::162:x, space s:::p, comp Out::::254:x, space :p:1:p}}, space :::p}}"
-			"$verticalGroup": "par l {seq {space :::x, par l {comp Multyplier:::::x, comp Money::::43:x}, space u:::p, comp Animation:::::x, space u:::p, par l:::p {comp Out::::79:x, comp Bet::l::79:x, comp Amount::l::79:x}, space ::10:x}}"
+			"$horizontalGroup": "par l {seq t {par l {seq {space :p:252:p, comp Multyplier::::284:x, space u:::p, comp Money::::155:x, space :p:6:p}, seq {space :p:5:p, comp Amount::::249:x, space :p:18:p, comp Bet::::167:x, space u:::p, comp Out::::258:x}}, space :::p}, comp Animation::l::715:x}"
+			"$verticalGroup": "par l {seq l {par l {comp Multyplier::::57:x, seq l {space :::p, comp Money::::51:x}}, space :::p, comp Animation::::328:x, space :p:12:p, par b:::p {comp Out::b::100:x, comp Bet::b::100:x, comp Amount::b::100:x}, space :::p}}"
 		} ) {
 			name: "this"
 			"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -14,11 +14,9 @@ new FormModel {
 				"background": new java.awt.Color( 51, 51, 51, 255 )
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {space :0:0:x}"
-				"$verticalGroup": "par l {space :0:348:x}"
-			} ) {
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridLayout ) ) {
 				name: "Animation"
+				"background": new java.awt.Color( 255, 255, 255, 255 )
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "Bet"
@@ -45,10 +43,10 @@ new FormModel {
 				name: "Multyplier"
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"background": new java.awt.Color( 0, 0, 0, 255 )
-				"font": new java.awt.Font( "Inter", 0, 14 )
+				"font": new java.awt.Font( "Inter", 0, 18 )
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 0 )
+			"location": new java.awt.Point( 5, 0 )
 			"size": new java.awt.Dimension( 715, 510 )
 		} )
 	}
