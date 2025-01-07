@@ -7,17 +7,21 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import Money.MoneyManager;
+import history.HistoryManager;
 public class blackjackGame extends JPanel {
     private Deck deck;
     private Dealer dealer;
     private Player player;
     private MoneyManager moneyManager;
+    private HistoryManager historyManager;
     private int currentBet;
     public JPanel mainPanel;
 
 
     public blackjackGame() {
         moneyManager = MoneyManager.getInstance();
+         historyManager = new HistoryManager();
+
         this.currentBet = 0;
 
         deck = new Deck();
@@ -138,21 +142,25 @@ public class blackjackGame extends JPanel {
         panel.repaint();
     }
 
+
     private void determineWinner(JLabel totalMoneyLabel) {
         int playerValue = player.getHandValue();
         int dealerValue = dealer.getHandValue();
 
         if (dealerValue > 21 || (playerValue <= 21 && playerValue > dealerValue)) {
-            JOptionPane.showMessageDialog(this, "Player wins!");
+            JOptionPane.showMessageDialog(this, "Player wins! Dealer scored: " + dealerValue);
+            historyManager.saveHistory(true, moneyManager.getTotalMoney(), "Blackjack");
             updateMoney(true, totalMoneyLabel);
         } else if (playerValue > 21 || dealerValue > playerValue) {
-            JOptionPane.showMessageDialog(this, "Dealer wins!");
+            JOptionPane.showMessageDialog(this, "Dealer wins! Dealer scored: " + dealerValue);
+            historyManager.saveHistory(false, moneyManager.getTotalMoney(), "Blackjack");
             updateMoney(false, totalMoneyLabel);
         } else {
-            JOptionPane.showMessageDialog(this, "It's a tie! Bet returned.");
+            JOptionPane.showMessageDialog(this, "It's a tie! Bet returned. Both scored: " + playerValue);
         }
         resetGame();
     }
+
 
     private void updateMoney(boolean playerWins, JLabel totalMoneyLabel) {
         if (playerWins) {

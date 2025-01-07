@@ -1,5 +1,7 @@
 package aviator;
 import Money.MoneyManager;
+import history.HistoryManager;
+
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
@@ -10,6 +12,8 @@ import java.text.DecimalFormat;
 
 public class Aviator extends JPanel {
     private MoneyManager moneyManager;
+    private HistoryManager historyManager;
+
     private Timer timer;
     private DecimalFormat df_obj = new DecimalFormat("#.##");
     private boolean gameRunning = false;
@@ -19,6 +23,8 @@ public class Aviator extends JPanel {
 
     public Aviator() {
         moneyManager = MoneyManager.getInstance();
+        historyManager = new HistoryManager();
+
         initComponents();
         this.setVisible(true);
         Money.setText("Money: $" + moneyManager.getTotalMoney());
@@ -80,6 +86,8 @@ public class Aviator extends JPanel {
             timer.stop();
             animation.stopAnimation();
             gameRunning = false;
+            historyManager.saveHistory(false, moneyManager.getTotalMoney(), "Aviator");
+
             JOptionPane.showMessageDialog(this, "Plane crashed! You lost your bet.");
         }
     }
@@ -93,9 +101,10 @@ public class Aviator extends JPanel {
         animation.stopAnimation();
         gameRunning = false;
         double winnings = betAmount * currentMultiplier;
+        boolean isWin = winnings > betAmount;
         moneyManager.setTotalMoney(moneyManager.getTotalMoney() + winnings);
         Money.setText("Money: $" + moneyManager.getTotalMoney());
-        JOptionPane.showMessageDialog(this, "You cashed out at " + df_obj.format(currentMultiplier) + "x and won $" + df_obj.format(winnings) + "!");
+        historyManager.saveHistory(isWin, moneyManager.getTotalMoney(), "Aviator");        JOptionPane.showMessageDialog(this, "You cashed out at " + df_obj.format(currentMultiplier) + "x and won $" + df_obj.format(winnings) + "!");
     }
 
     private void initComponents() {

@@ -11,6 +11,7 @@ import javax.swing.SwingWorker;
 import javax.swing.border.*;
 
 import Money.MoneyManager;
+import history.HistoryManager;
 
 public class kazino extends JPanel {
     private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
@@ -22,6 +23,7 @@ public class kazino extends JPanel {
     private double angle = 0;
     public double diff= 360/74;
     MoneyManager moneyManager = MoneyManager.getInstance();
+    HistoryManager historyManager = new HistoryManager();
 
     public kazino() {
 
@@ -209,6 +211,8 @@ public class kazino extends JPanel {
                                 if (rand == chosenNumber) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
+
                                 }
                                 break;
                             case "Split (2 numbers)":
@@ -218,6 +222,7 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[1].trim())))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
                             case "Street (3 numbers)":
@@ -228,6 +233,7 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[2].trim()))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
                             case "Corner (4 numbers)":
@@ -239,6 +245,7 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[3].trim()))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
                         }
@@ -249,14 +256,18 @@ public class kazino extends JPanel {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
+
                                 } else if (Colors1.getSelectedItem().equals("Red") && rand % 2 != 0 && rand != 0) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 } else if (Colors1.getSelectedItem().equals("Green") && rand == 0) {
                                     win = true;
                                     payoutMultiplier = 35;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
 
@@ -265,10 +276,12 @@ public class kazino extends JPanel {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 } else if (Colors1.getSelectedItem().equals("Odd") && rand % 2 != 0) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
                             case "Lower or Higher":
@@ -276,15 +289,18 @@ public class kazino extends JPanel {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 } else if (Colors1.getSelectedItem().equals("Lower") && rand > Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 else if (rand == Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     payoutMultiplier = 1;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
+
                                 }
                                 break;
                         }
@@ -300,8 +316,12 @@ public class kazino extends JPanel {
 
             if (win) {
                 JOptionPane.showMessageDialog(null, "You win!");
+                historyManager.saveHistory(true, moneyManager.getTotalMoney(), "Roulete");
+
             } else {
                 JOptionPane.showMessageDialog(null, "You lose your bet of $" + bet);
+                historyManager.saveHistory(false, moneyManager.getTotalMoney(), "Roulete");
+
             }
             updateMoneyDisplay();
         }

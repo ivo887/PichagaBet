@@ -158,21 +158,21 @@ public class mainMenu extends JFrame {
                             .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
-                                .addContainerGap(325, Short.MAX_VALUE)
-                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 119, GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(303, Short.MAX_VALUE)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
                     );
                     panel3Layout.setVerticalGroup(
                         panel3Layout.createParallelGroup()
                             .addGroup(panel3Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(label1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
                                 .addGap(58, 58, 58))
                     );
                 }
