@@ -29,8 +29,8 @@ new FormModel {
 				name: "panel4"
 				"background": new java.awt.Color( 0, 0, 0, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {comp button2::::450:x, comp button4:::::x, comp button1::t:::x, seq t {space ::303:x, comp label1:::p:141:p, space :::p}}"
-					"$verticalGroup": "par l {seq {space :::p, comp label1:::p:33:p, space s:::p, comp button2::::55:x, space s:::p, comp button4::::53:x, space s:::p, comp button1::::53:x, space :p:58:p}}"
+					"$horizontalGroup": "par l {comp button2:::::x, comp button4:::::x, comp button1::t:::x, seq t {space ::303:x, comp label1:::p:141:p, space :::p}, comp button5::t::450:x}"
+					"$verticalGroup": "par l {seq {space :::p, comp label1:::p:33:p, space s:::p, comp button2::::48:x, space s:::p, comp button4::::48:x, space s:::p, comp button1::::48:x, space s:::p, comp button5::::46:x, space :p:11:p}}"
 				} ) {
 					name: "panel3"
 					"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -46,7 +46,7 @@ new FormModel {
 						"text": "Roulete"
 						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
 						"background": &Color1 new java.awt.Color( 51, 51, 51, 255 )
-						"preferredSize": new java.awt.Dimension( 80, 34 )
+						"preferredSize": &Dimension0 new java.awt.Dimension( 80, 34 )
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "button4"
@@ -60,6 +60,13 @@ new FormModel {
 						"text": "text"
 						"foreground": new java.awt.Color( 255, 255, 255, 255 )
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 14, false )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button5"
+						"text": "Transaction history"
+						"foreground": #Color0
+						"background": #Color1
+						"preferredSize": #Dimension0
 					} )
 				} )
 			} )

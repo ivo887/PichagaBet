@@ -2,3 +2,8 @@ Game: Blackjack | Result: Loss | Money: $70236.52
 Game: Aviator | Result: Loss | Money: $70229.52
 Game: Aviator | Result: Loss | Money: $70226.24
 Game: Roulete | Result: Win | Money: $70226.24
+Game: Roulete | Result: Loss | Money: $69980.24
+Game: Roulete | Result: Loss | Money: $69857.24
+Game: Roulete | Result: Loss | Money: $69734.24
+Game: Roulete | Result: Win | Money: $70595.24
+Game: Blackjack | Result: Loss | Money: $70595.24

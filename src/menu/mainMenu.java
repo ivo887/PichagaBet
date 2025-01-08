@@ -5,7 +5,7 @@ import Money.MoneyManager;
 import aviator.Aviator;
 import blackjack.blackjackGame;
 import roulete.kazino;
-
+import history.transactions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,6 +62,7 @@ public class mainMenu extends JFrame {
         });
 
         this.button4.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
                 frame.remove(panel1);
@@ -72,6 +73,19 @@ public class mainMenu extends JFrame {
                 frame.repaint();
             }
         });
+        this.button5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
+                frame.remove(panel1);
+                transactions HistoryPanel  = new transactions();
+                frame.add(HistoryPanel);
+                HistoryPanel.add(button3);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+
     }
 
 
@@ -87,6 +101,7 @@ public class mainMenu extends JFrame {
         button1 = new JButton();
         button4 = new JButton();
         label1 = new JLabel();
+        button5 = new JButton();
 
         //======== panel1 ========
         {
@@ -150,17 +165,24 @@ public class mainMenu extends JFrame {
                     label1.setForeground(Color.white);
                     label1.setFont(label1.getFont().deriveFont(label1.getFont().getStyle() & ~Font.BOLD, label1.getFont().getSize() + 14f));
 
+                    //---- button5 ----
+                    button5.setText("Transaction history");
+                    button5.setForeground(Color.white);
+                    button5.setBackground(new Color(0x333333));
+                    button5.setPreferredSize(new Dimension(80, 34));
+
                     GroupLayout panel3Layout = new GroupLayout(panel3);
                     panel3.setLayout(panel3Layout);
                     panel3Layout.setHorizontalGroup(
                         panel3Layout.createParallelGroup()
-                            .addComponent(button2, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                            .addComponent(button2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(button1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(GroupLayout.Alignment.TRAILING, panel3Layout.createSequentialGroup()
                                 .addContainerGap(303, Short.MAX_VALUE)
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
+                            .addComponent(button5, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                     );
                     panel3Layout.setVerticalGroup(
                         panel3Layout.createParallelGroup()
@@ -168,12 +190,14 @@ public class mainMenu extends JFrame {
                                 .addContainerGap()
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
-                                .addGap(58, 58, 58))
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addGap(18, 18, 18)
+                                .addComponent(button5, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                                .addGap(11, 11, 11))
                     );
                 }
 
@@ -223,5 +247,6 @@ public class mainMenu extends JFrame {
     private JButton button1;
     private JButton button4;
     private JLabel label1;
+    private JButton button5;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

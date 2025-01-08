@@ -40,30 +40,37 @@ public class blackjackGame extends JPanel {
     private void initComponents() {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-
+        mainPanel.setBackground(new Color(0x333333));
         JPanel playerPanel = new JPanel();
         playerPanel.setLayout(new BoxLayout(playerPanel, BoxLayout.Y_AXIS));
+        playerPanel.setBackground(new Color(0x333333));
         JLabel playerHandLabel = new JLabel("Player's Hand: ");
+        playerHandLabel.setForeground(Color.WHITE);
         playerPanel.add(playerHandLabel);
 
         JPanel dealerPanel = new JPanel();
         dealerPanel.setLayout(new BoxLayout(dealerPanel, BoxLayout.Y_AXIS));
+        dealerPanel.setBackground(new Color(0x333333));
         JLabel dealerHandLabel = new JLabel("Dealer's Hand: ");
+        dealerHandLabel.setForeground(Color.WHITE);
         dealerPanel.add(dealerHandLabel);
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(0x333333));
         JButton dealToPlayerButton = new JButton("Deal to Player");
         JButton standButton = new JButton("Stand");
         buttonPanel.add(dealToPlayerButton);
         buttonPanel.add(standButton);
 
         JLabel totalMoneyLabel = new JLabel("Money: $" + moneyManager.getTotalMoney());
-
+        totalMoneyLabel.setForeground(Color.WHITE);
 
         JLabel betLabel = new JLabel("Place your bet: ");
+        betLabel.setForeground(Color.WHITE);
         JTextField betField = new JTextField(5);
         JButton placeBetButton = new JButton("Place Bet");
         JPanel bettingPanel = new JPanel();
+        bettingPanel.setBackground(new Color(0x333333));
         bettingPanel.add(betLabel);
         bettingPanel.add(betField);
         bettingPanel.add(placeBetButton);
@@ -76,6 +83,8 @@ public class blackjackGame extends JPanel {
 
         setSize(600, 400);
         add(mainPanel);
+
+
 
 
         dealToPlayerButton.addActionListener(e -> {
