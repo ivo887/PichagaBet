@@ -1,7 +1,6 @@
 # PichagaBet
 
-A brief description of your project goes here. Explain what it does, why it’s useful, or what problem it solves.
-
+Casino featuring 3 game - roulette, aviator and blackjack
 ## Features
 
 - Super complex casino
