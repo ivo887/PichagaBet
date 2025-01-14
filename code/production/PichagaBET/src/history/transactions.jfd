@@ -1,0 +1,34 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.5" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp scrollPane1::t::400:x}"
+			"$verticalGroup": "par l {seq t {space :p:40:p, comp scrollPane1::::260:x}}"
+		} ) {
+			name: "this"
+			"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			"background": new java.awt.Color( 51, 51, 51, 255 )
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "scrollPane1"
+				"background": new java.awt.Color( 51, 51, 51, 255 )
+				"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+				add( new FormComponent( "javax.swing.JTextPane" ) {
+					name: "textPane1"
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"background": new java.awt.Color( 51, 51, 51, 255 )
+					"caretColor": new java.awt.Color( 255, 255, 255, 255 )
+					"editable": false
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 7, false )
+					"alignmentX": 0.0f
+					"alignmentY": 0.0f
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}

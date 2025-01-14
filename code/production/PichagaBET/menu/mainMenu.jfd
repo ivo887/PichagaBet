@@ -1,0 +1,78 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.5" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {comp panel4:::::x, seq {comp panel2:::p::p, space :::x}}"
+			"$verticalGroup": "par l {seq t {comp panel2:::p:42:p, space :p:70:p, comp panel4:::::x}}"
+		} ) {
+			name: "panel1"
+			"background": new java.awt.Color( 0, 0, 0, 255 )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, comp button3:::p::p, space :::x}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp button3:::p::p, space :::x}}"
+			} ) {
+				name: "panel2"
+				"background": new java.awt.Color( 0, 0, 0, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "HOME"
+					"background": new java.awt.Color( 51, 51, 51, 255 )
+					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				} )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {comp panel3::t:::x}"
+				"$verticalGroup": "par l {comp panel3::t:::x}"
+			} ) {
+				name: "panel4"
+				"background": new java.awt.Color( 0, 0, 0, 255 )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+					"$horizontalGroup": "par l {comp button2:::::x, comp button4:::::x, comp button1::t:::x, seq t {space ::303:x, comp label1:::p:141:p, space :::p}, comp button5::t::450:x}"
+					"$verticalGroup": "par l {seq {space :::p, comp label1:::p:33:p, space s:::p, comp button2:::::x, space s:::p, comp button4:::::x, space s:::p, comp button1:::::x, space s:::p, comp button5:::::x, space :p:11:p}}"
+				} ) {
+					name: "panel3"
+					"background": new java.awt.Color( 0, 0, 0, 255 )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "Blackjack"
+						"background": new java.awt.Color( 51, 51, 51, 255 )
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
+						"preferredSize": new java.awt.Dimension( 80, 34 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button1"
+						"text": "Roulete"
+						"foreground": &Color0 new java.awt.Color( 255, 255, 255, 255 )
+						"background": &Color1 new java.awt.Color( 51, 51, 51, 255 )
+						"preferredSize": &Dimension0 new java.awt.Dimension( 80, 34 )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button4"
+						"text": "Aviator"
+						"foreground": #Color0
+						"background": #Color1
+						"preferredSize": new java.awt.Dimension( 80, 34 )
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "text"
+						"foreground": new java.awt.Color( 255, 255, 255, 255 )
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 14, false )
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button5"
+						"text": "Transaction history"
+						"foreground": #Color0
+						"background": #Color1
+						"preferredSize": #Dimension0
+					} )
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 105, 100 )
+			"size": new java.awt.Dimension( 450, 360 )
+		} )
+	}
+}
