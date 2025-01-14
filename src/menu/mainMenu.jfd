@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 			"$horizontalGroup": "par l {comp panel4:::::x, seq {comp panel2:::p::p, space :::x}}"
-			"$verticalGroup": "par l {seq t {comp panel2:::p:42:p, space :::p, comp panel4:::::x}}"
+			"$verticalGroup": "par l {seq t {comp panel2:::p:42:p, space :p:70:p, comp panel4:::::x}}"
 		} ) {
 			name: "panel1"
 			"background": new java.awt.Color( 0, 0, 0, 255 )
@@ -30,7 +30,7 @@ new FormModel {
 				"background": new java.awt.Color( 0, 0, 0, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
 					"$horizontalGroup": "par l {comp button2:::::x, comp button4:::::x, comp button1::t:::x, seq t {space ::303:x, comp label1:::p:141:p, space :::p}, comp button5::t::450:x}"
-					"$verticalGroup": "par l {seq {space :::p, comp label1:::p:33:p, space s:::p, comp button2::::48:x, space s:::p, comp button4::::48:x, space s:::p, comp button1::::48:x, space s:::p, comp button5::::46:x, space :p:11:p}}"
+					"$verticalGroup": "par l {seq {space :::p, comp label1:::p:33:p, space s:::p, comp button2:::::x, space s:::p, comp button4:::::x, space s:::p, comp button1:::::x, space s:::p, comp button5:::::x, space :p:11:p}}"
 				} ) {
 					name: "panel3"
 					"background": new java.awt.Color( 0, 0, 0, 255 )

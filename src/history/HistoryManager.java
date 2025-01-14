@@ -11,7 +11,7 @@ public class HistoryManager {
     }
 
     public static void saveHistory(boolean isResultWin, double currentMoney, String gamePlayed) {
-        try (FileWriter writer = new FileWriter("src/history/history.txt", true)) { // 'true' enables appending
+        try (FileWriter writer = new FileWriter("src/history/history.txt", true)) {
             writer.write(String.format("Game: %s | Result: %s | Money: $%.2f\n",
                     gamePlayed, isResultWin ? "Win" : "Loss", currentMoney));
         } catch (IOException e) {

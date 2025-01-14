@@ -24,6 +24,10 @@ public class mainMenu extends JFrame {
         panel2.remove(button3);
         label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
 
+
+
+
+
         this.button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 label1.setText("$ "+MoneyManager.getInstance().getTotalMoney());
@@ -44,6 +48,7 @@ public class mainMenu extends JFrame {
                 blackjackGame blackJackPanel = new blackjackGame();
                 frame.add(blackJackPanel.mainPanel);
                 blackJackPanel.mainPanel.add(button3, BorderLayout.NORTH);
+                button3.setSize(frame.getWidth() / 18, frame.getHeight() / 18);
                 frame.revalidate();
                 frame.repaint();
             }
@@ -69,6 +74,7 @@ public class mainMenu extends JFrame {
                 Aviator aviatorPanel = new Aviator();
                 frame.add(aviatorPanel);
                 aviatorPanel.add(button3);
+                button3.setSize(frame.getWidth() / 18, frame.getHeight() / 18);
                 frame.revalidate();
                 frame.repaint();
             }
@@ -81,6 +87,7 @@ public class mainMenu extends JFrame {
                 transactions HistoryPanel  = new transactions();
                 frame.add(HistoryPanel);
                 HistoryPanel.add(button3);
+                button3.setSize(frame.getWidth() / 18, frame.getHeight() / 18);
                 frame.revalidate();
                 frame.repaint();
             }
@@ -190,13 +197,13 @@ public class mainMenu extends JFrame {
                                 .addContainerGap()
                                 .addComponent(label1, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addComponent(button2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addComponent(button4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                                .addComponent(button1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(button5, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                                .addComponent(button5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(11, 11, 11))
                     );
                 }
@@ -226,7 +233,7 @@ public class mainMenu extends JFrame {
                 panel1Layout.createParallelGroup()
                     .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(70, 70, 70)
                         .addComponent(panel4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
         }

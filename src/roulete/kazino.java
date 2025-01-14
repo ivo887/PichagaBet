@@ -6,35 +6,30 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Random;
 import javax.swing.*;
-import javax.swing.SwingUtilities;
-import javax.swing.SwingWorker;
-import javax.swing.border.*;
-
 import Money.MoneyManager;
 import history.HistoryManager;
 
 public class kazino extends JPanel {
-    private String bet1[]={"Straight Up (1 number)","Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
-    private String bet2[]={"Odd", "Even"};
-    private String bet3[]={"Black", "Red", "Green"};
-    private String bet4[]={"Higher", "Lower"};
+    private String[] bet1 = {"Straight Up (1 number)", "Split (2 numbers)", "Street (3 numbers)", "Corner (4 numbers)", "Color(Black or Red)", "Odd or Even", "Lower or Higher"};
+    private String[] bet2 = {"Odd", "Even"};
+    private String[] bet3 = {"Black", "Red", "Green"};
+    private String[] bet4 = {"Higher", "Lower"};
     private RoulettePanel roulettePanel;
     private Timer timer;
     private double angle = 0;
-    public double diff= 360/74;
-    MoneyManager moneyManager = MoneyManager.getInstance();
-    HistoryManager historyManager = new HistoryManager();
+    private final double diff = 360 / 74.0;
+    private final MoneyManager moneyManager = MoneyManager.getInstance();
+    private final HistoryManager historyManager = new HistoryManager();
 
     public kazino() {
-
         initComponents();
-        comboBox1.setForeground(java.awt.Color.WHITE);
-        textField1.setCaretColor(java.awt.Color.white);
-        numbers.setCaretColor(java.awt.Color.white);
+        comboBox1.setForeground(Color.WHITE);
+        textField1.setCaretColor(Color.white);
+        numbers.setCaretColor(Color.white);
         roulettePanel = new RoulettePanel();
         panel2.add(roulettePanel);
-        roulettePanel.setBackground(java.awt.Color.darkGray);
-        for(String bet : bet1) {
+        roulettePanel.setBackground(Color.darkGray);
+        for (String bet : bet1) {
             comboBox1.addItem(bet);
         }
 
@@ -46,12 +41,6 @@ public class kazino extends JPanel {
                 String selectedItem = comboBox1.getSelectedItem().toString();
                 Colors1.removeAllItems();
                 switch (selectedItem) {
-                    case "Straight Up (1 number)":
-                    case "Split (2 numbers)":
-                    case "Street (3 numbers)":
-                    case "Corner (4 numbers)":
-
-                        break;
                     case "Color(Black or Red)":
                         for (String color : bet3) {
                             Colors1.addItem(color);
@@ -70,16 +59,17 @@ public class kazino extends JPanel {
                 }
             }
         });
+
         button1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if(moneyManager.getTotalMoney() < Integer.parseInt(textField1.getText())) {
+                    int bet = Integer.parseInt(textField1.getText());
+                    if (moneyManager.getTotalMoney() < bet) {
                         JOptionPane.showMessageDialog(null, "You don't have enough money to place this bet.");
                         return;
                     }
-                    int bet = Integer.parseInt(textField1.getText());
                     String betNumbers = numbers.getText().trim();
-                    moneyManager.setTotalMoney(moneyManager.getTotalMoney()-bet);
+                    moneyManager.setTotalMoney(moneyManager.getTotalMoney() - bet);
                     button1.setEnabled(false);
                     Random rand = new Random();
                     int rand_int1 = rand.nextInt(37);
@@ -87,7 +77,7 @@ public class kazino extends JPanel {
                     timer = new Timer(10, new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            double targetAngle = rand_int1 * (360.0 / 37)+720;
+                            double targetAngle = rand_int1 * (360.0 / 37) + 720;
                             if (angle < targetAngle) {
                                 angle += diff;
                                 if (angle > targetAngle) {
@@ -104,30 +94,30 @@ public class kazino extends JPanel {
                     timer.start();
 
                 } catch (NumberFormatException ex) {
+                    // Handle exception
                 }
             }
         });
     }
+
     private class RoulettePanel extends JPanel {
         private final int NUM_SEGMENTS = 37;
         private final Color[] COLORS = {
-                java.awt.Color.green, java.awt.Color.red,
-                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
-                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
-                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
-                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
-                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
-                java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red,
-                java.awt.Color.black, java.awt.Color.red, java.awt.Color.black, java.awt.Color.red, java.awt.Color.black,
+                Color.green, Color.red, Color.black, Color.red, Color.black, Color.red, Color.black,
+                Color.red, Color.black, Color.red, Color.black, Color.red, Color.black, Color.red,
+                Color.black, Color.red, Color.black, Color.red, Color.black, Color.red, Color.black,
+                Color.red, Color.black, Color.red, Color.black, Color.red, Color.black, Color.red,
+                Color.black, Color.red, Color.black, Color.red, Color.black, Color.red, Color.black,
+                Color.red, Color.black
         };
 
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setBackground(java.awt.Color.darkGray);
-            g2d.setColor(java.awt.Color.white);
-            g2d.fillRect(getWidth()/2+getHeight()/2+2,getHeight()/2-getHeight()/16, getHeight()/64, getHeight()/64);
+            g2d.setBackground(Color.darkGray);
+            g2d.setColor(Color.white);
+            g2d.fillRect(getWidth() / 2 + getHeight() / 2 + 2, getHeight() / 2 - getHeight() / 16, getHeight() / 64, getHeight() / 64);
 
             int diameter = Math.min(getWidth(), getHeight());
             int radius = diameter / 2;
@@ -141,7 +131,7 @@ public class kazino extends JPanel {
                 g2d.fillArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, (int) startAngle, (int) arcAngle);
             }
 
-            g2d.setColor(java.awt.Color.black);
+            g2d.setColor(Color.black);
             g2d.drawArc(getWidth() / 2 - radius, getHeight() / 2 - radius, diameter, diameter, 0, 360);
         }
 
@@ -156,10 +146,10 @@ public class kazino extends JPanel {
     }
 
     private class ProgressTask extends SwingWorker<Void, Integer> {
-        private int rand;
-        private int bet;
-        private String betType;
-        private String betNumbers;
+        private final int rand;
+        private final int bet;
+        private final String betType;
+        private final String betNumbers;
 
         public ProgressTask(int rand, int bet, String betType, String betNumbers) {
             this.rand = rand;
@@ -177,7 +167,6 @@ public class kazino extends JPanel {
                     e.printStackTrace();
                 }
             }
-
             return null;
         }
 
@@ -192,18 +181,16 @@ public class kazino extends JPanel {
             button1.setEnabled(true);
             boolean win = false;
 
-
             String[] numbersArray = betNumbers.split(",");
             int payoutMultiplier = 0;
             for (String number : numbersArray) {
                 try {
-                    if (!betType.equals("Color(Black or Red)")&& !betType.equals("Odd or Even") && !betType.equals("Lower or Higher")) {
+                    if (!betType.equals("Color(Black or Red)") && !betType.equals("Odd or Even") && !betType.equals("Lower or Higher")) {
                         int chosenNumber = Integer.parseInt(number.trim());
                         if (chosenNumber < 0 || chosenNumber > 36) {
                             JOptionPane.showMessageDialog(null, "Please enter valid numbers (0-36).");
                             return;
                         }
-
 
                         switch (betType) {
                             case "Straight Up (1 number)":
@@ -211,8 +198,6 @@ public class kazino extends JPanel {
                                 if (rand == chosenNumber) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
-
                                 }
                                 break;
                             case "Split (2 numbers)":
@@ -222,7 +207,6 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[1].trim())))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
                             case "Street (3 numbers)":
@@ -233,7 +217,6 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[2].trim()))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
                             case "Corner (4 numbers)":
@@ -245,7 +228,6 @@ public class kazino extends JPanel {
                                                 rand == Integer.parseInt(numbersArray[3].trim()))) {
                                     win = true;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
                         }
@@ -256,32 +238,25 @@ public class kazino extends JPanel {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
-
                                 } else if (Colors1.getSelectedItem().equals("Red") && rand % 2 != 0 && rand != 0) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 } else if (Colors1.getSelectedItem().equals("Green") && rand == 0) {
                                     win = true;
                                     payoutMultiplier = 35;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
-
                             case "Odd or Even":
                                 if (Colors1.getSelectedItem().equals("Even") && rand % 2 == 0) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 } else if (Colors1.getSelectedItem().equals("Odd") && rand % 2 != 0) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
                             case "Lower or Higher":
@@ -289,18 +264,14 @@ public class kazino extends JPanel {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 } else if (Colors1.getSelectedItem().equals("Lower") && rand > Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     payoutMultiplier = 2;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
-                                }
-                                else if (rand == Integer.parseInt(numbersArray[0].trim())) {
+                                } else if (rand == Integer.parseInt(numbersArray[0].trim())) {
                                     win = true;
                                     payoutMultiplier = 1;
                                     moneyManager.setTotalMoney(moneyManager.getTotalMoney() + bet * payoutMultiplier);
-
                                 }
                                 break;
                         }
@@ -313,15 +284,12 @@ public class kazino extends JPanel {
                 }
             }
 
-
             if (win) {
                 JOptionPane.showMessageDialog(null, "You win!");
                 historyManager.saveHistory(true, moneyManager.getTotalMoney(), "Roulete");
-
             } else {
                 JOptionPane.showMessageDialog(null, "You lose your bet of $" + bet);
                 historyManager.saveHistory(false, moneyManager.getTotalMoney(), "Roulete");
-
             }
             updateMoneyDisplay();
         }

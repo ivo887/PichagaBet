@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PichagaBET:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/PichagaBET_jar</output-path>
+    <root id="archive" name="PichagaBET.jar">
+      <element id="module-output" name="PichagaBET" />
+      <element id="library" level="project" name="MigLayout" />
+    </root>
+  </artifact>
+</component>
